@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Blog | Estatery</title>
+
+  <meta name="description"
+    content="Read practical real estate guides, property tips, buying advice and market insights from Estatery.">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- =========================================
+       SVG ICONS
+  ========================================== -->
+  <svg style="display:none">
+
+    <symbol id="i-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41
+      M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+    </symbol>
+
+    <symbol id="i-moon" viewBox="0 0 24 24">
+      <path d="M21 12.8A8.5 8.5 0 1111.2 3
+      6.7 6.7 0 0021 12.8z"></path>
+    </symbol>
+
+    <symbol id="i-user" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="4"></circle>
+      <path d="M4 21a8 8 0 0116 0"></path>
+    </symbol>
+
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 6h16M4 12h16M4 18h16"></path>
+    </symbol>
+
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <path d="M3 7l9 6 9-6"></path>
+    </symbol>
+
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <path d="M6 2h3l2 5-2 2a16 16 0 006 6l2-2 5 2v3
+      c0 1-1 2-2 2C10 20 4 14 4 4c0-1 1-2 2-2z"></path>
+    </symbol>
+
+  </svg>
+
+  <header class="nav">
+  <div class="wrap">
+
+    <!-- LOGO -->
+    <a class="logo" href="index.html">
+      <img src="assets/logo.png" alt="Brand Logo" width="38" height="38">
+<span class="logo-text">Estatery</span>    </a>
+
+    <!-- NAVIGATION -->
+    <ul class="links" id="links">
+
+      <li>
+        <a class="l " href="index.html">Home</a>
+      </li>
+
+      <li>
+        <a class="l" href="home-2.html">Home 2</a>
+      </li>
+
+      <li>
+        <a class="l" href="about.html">About</a>
+      </li>
+
+      <li>
+        <a class="l" href="properties.html">Properties</a>
+      </li>
+
+      <li>
+        <a class="l act" href="blog.html">Blog</a>
+      </li>
+
+      <li>
+        <a class="l" href="contact.html">Contact</a>
+      </li>
+
+    </ul>
+
+    <!-- ACTIONS -->
+    <div class="acts">
+
+      <!-- DARK / LIGHT MODE -->
+      <button
+        class="ib"
+        data-act="theme"
+        aria-label="Toggle Dark/Light Mode"
+        title="Toggle Theme"
+      >
+        <svg
+          class="ic sun"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="5"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+
+        <svg
+          class="ic moon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- RTL / LTR -->
+      <button
+        class="ib"
+        data-act="dir"
+        aria-label="Toggle RTL Direction"
+        title="RTL / LTR"
+      >
+        <b style="position:static;background:none;color:inherit;font-size:11px">
+          RTL
+        </b>
+      </button>
+
+      <!-- PROFILE -->
+      <div class="pf">
+
+        <button
+          class="ib"
+          data-act="pf"
+          aria-label="User Account Menu"
+          aria-haspopup="true"
+        >
+          <svg
+            class="ic"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+
+        <!-- PROFILE DROPDOWN -->
+        <div class="dd">
+
+          <div class="dropdown-header">
+            <h4>Estatery</h4>
+          </div>
+
+          <a href="login.html">Login</a>
+
+          <a href="login.html">Signup</a>
+
+          <a href="dashboard.html">User Dashboard</a>
+
+          <a href="admin-dashboard.html">Admin Dashboard</a>
+
+        </div>
+
+      </div>
+
+      <!-- MOBILE MENU -->
+      <button
+        class="ib burger"
+        data-act="menu"
+        aria-label="Toggle menu"
+      >
+        <svg
+          class="ic"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<section
+  class="page-hero"
+  style="--hero-img: url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1800&q=80')"
+>
+  <div class="hero-overlay"></div>
+
+  <div class="wrap hero-in">
+    <span class="eyebrow">ESTATERY JOURNAL</span>
+
+    <h1>
+      Ideas, insights<br>
+      and inspiration for better living.
+    </h1>
+
+    <p>
+      Explore real estate trends, home-buying advice,
+      interior inspiration and stories from the world of property.
+    </p>
+
+    <a href="#blog" class="btn cta">
+      Read Our Stories →
+    </a>
+  </div>
+</section>
+  <!-- =========================================
+       BLOG INTRO
+  ========================================== -->
+  <section class="sec">
+
+    <div class="wrap">
+
+      <div class="head">
+
+        <div>
+
+          <span class="eyebrow">
+            OUR BLOG
+          </span>
+
+          <h2>
+            Latest Articles
+          </h2>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- BLOG GRID -->
+      <div class="grid g3">
+
+
+        <!-- =====================================
+             BLOG 1
+        ====================================== -->
+        <article class="card blog-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1000&q=80"
+            alt="Modern apartment living room with natural light">
+
+          <div class="pc">
+
+            <span class="badge">
+              Tips
+            </span>
+
+            <h3>
+              Five Questions to Ask During Every Property Site Visit
+            </h3>
+
+            <p>
+              A practical guide to checking the important details
+              that photographs cannot show during a property visit.
+            </p>
+
+            <div class="bmeta">
+
+              <span>
+                Ananya Krishnan
+              </span>
+
+              <span>
+                Sep 28, 2026
+              </span>
+
+            </div>
+
+            <a
+              href="blog-details.html?id=site-visit"
+              class="btn sm">
+
+              View Details
+
+            </a>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- =====================================
+             BLOG 2
+        ====================================== -->
+        <article class="card blog-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1000&q=80"
+            alt="Modern villa with garden and outdoor space">
+
+          <div class="pc">
+
+            <span class="badge">
+              Buying Guide
+            </span>
+
+            <h3>
+              Choosing Between an Apartment and Villa
+            </h3>
+
+            <p>
+              Understand the practical differences between apartment
+              and villa living before choosing your next home.
+            </p>
+
+            <div class="bmeta">
+
+              <span>
+                Rahul Menon
+              </span>
+
+              <span>
+                Sep 24, 2026
+              </span>
+
+            </div>
+
+            <a
+              href="blog-details.html?id=apartment-villa"
+              class="btn sm">
+
+              View Details
+
+            </a>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- =====================================
+             BLOG 3
+        ====================================== -->
+        <article class="card blog-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1000&q=80"
+            alt="Property documents and paperwork on a desk">
+
+          <div class="pc">
+
+            <span class="badge">
+              Legal
+            </span>
+
+            <h3>
+              How to Read a Property Tax Receipt
+            </h3>
+
+            <p>
+              Learn which details to look for when reviewing
+              property tax information and related documents.
+            </p>
+
+            <div class="bmeta">
+
+              <span>
+                Priya Sharma
+              </span>
+
+              <span>
+                Sep 20, 2026
+              </span>
+
+            </div>
+
+            <a
+              href="blog-details.html?id=property-tax"
+              class="btn sm">
+
+              View Details
+
+            </a>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- =====================================
+             BLOG 4
+        ====================================== -->
+        <article class="card blog-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1000&q=80"
+            alt="Financial planning documents and calculator">
+
+          <div class="pc">
+
+            <span class="badge">
+              Finance
+            </span>
+
+            <h3>
+              Home Loan Basics for First-Time Buyers
+            </h3>
+
+            <p>
+              A beginner-friendly overview of down payments,
+              loan terms, interest and monthly commitments.
+            </p>
+
+            <div class="bmeta">
+
+              <span>
+                Meera Joseph
+              </span>
+
+              <span>
+                Sep 15, 2026
+              </span>
+
+            </div>
+
+            <a
+              href="blog-details.html?id=home-loan"
+              class="btn sm">
+
+              View Details
+
+            </a>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- =====================================
+             BLOG 5
+        ====================================== -->
+        <article class="card blog-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80"
+            alt="Modern buildings in a city representing real estate development">
+
+          <div class="pc">
+
+            <span class="badge">
+              Market
+            </span>
+
+            <h3>
+              Understanding Rental Yields
+            </h3>
+
+            <p>
+              Learn the basic factors that can affect rental income
+              when comparing properties and locations.
+            </p>
+
+            <div class="bmeta">
+
+              <span>
+                Arjun Kumar
+              </span>
+
+              <span>
+                Sep 11, 2026
+              </span>
+
+            </div>
+
+            <a
+              href="blog-details.html?id=rental-yield"
+              class="btn sm">
+
+              View Details
+
+            </a>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- =====================================
+             BLOG 6
+        ====================================== -->
+        <article class="card blog-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=80"
+            alt="Bright contemporary home interior with comfortable furniture">
+
+          <div class="pc">
+
+            <span class="badge">
+              Lifestyle
+            </span>
+
+            <h3>
+              Simple Ways to Make a New Home Feel Comfortable
+            </h3>
+
+            <p>
+              Small planning and interior choices can make a new
+              property feel more welcoming and functional.
+            </p>
+
+            <div class="bmeta">
+
+              <span>
+                Kavya Nair
+              </span>
+
+              <span>
+                Sep 07, 2026
+              </span>
+
+            </div>
+
+            <a
+              href="blog-details.html?id=new-home"
+              class="btn sm">
+
+              View Details
+
+            </a>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       CTA
+  ========================================== -->
+  <section class="sec">
+
+    <div class="wrap">
+
+      <div class="card cta">
+
+        <div>
+
+          <span class="eyebrow">
+            FIND YOUR NEXT HOME
+          </span>
+
+          <h2>
+            Ready to explore properties?
+          </h2>
+
+          <p>
+            Browse homes, apartments and investment properties
+            listed on Estatery.
+          </p>
+
+        </div>
+
+        <a
+          href="properties.html"
+          class="btn">
+
+          Explore Properties
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+  <footer class="ft">
+
+    <div class="wrap">
+
+      <div class="grid g4">
+
+
+        <div>
+
+          <a class="logo" href="index.html">
+
+            <img
+              src="assets/logo.png"
+              alt="Estatery logo"
+              width="38"
+              height="38">
+
+            <span class="logo-text">
+              Estatery
+            </span>
+
+          </a>
+
+          <p>
+            Making property discovery simpler,
+            clearer and more enjoyable.
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <h4>Explore</h4>
+
+          <a href="properties.html">
+            Properties
+          </a>
+
+          <a href="blog.html">
+            Blog
+          </a>
+
+          <a href="agents.html">
+            Agents
+          </a>
+
+          <a href="locations.html">
+            Locations
+          </a>
+
+        </div>
+
+
+        <div>
+
+          <h4>Company</h4>
+
+          <a href="about.html">
+            About Us
+          </a>
+
+          <a href="services.html">
+            Services
+          </a>
+
+          <a href="contact.html">
+            Contact
+          </a>
+
+        </div>
+
+
+        <div>
+
+          <h4>Contact</h4>
+
+          <p>
+            hello@estatery.com
+          </p>
+
+          <p>
+            +91 98765 43210
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="bt">
+
+        <span>
+          © 2026 Estatery. All rights reserved.
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

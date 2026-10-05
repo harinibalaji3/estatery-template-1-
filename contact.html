@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1">
+
+  <title>Contact Us | Estatery</title>
+
+  <meta
+    name="description"
+    content="Contact Estatery for property enquiries, site visits, buying and rental assistance."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/style.css"
+  >
+
+  <script>
+    try {
+      var t = localStorage.getItem("theme"),
+          d = localStorage.getItem("dir");
+
+      document.documentElement.dataset.theme = t || "light";
+      document.documentElement.dir = d || "ltr";
+
+    } catch (e) {}
+  </script>
+
+  <script
+    src="assets/js/main.js"
+    defer>
+  </script>
+
+
+  <!-- =========================================
+       CONTACT PAGE CSS
+  ========================================== -->
+
+  <style>
+
+    /* =========================================
+       CONTACT INTRO
+    ========================================== */
+
+    .contact-intro {
+      max-width: 720px;
+      margin: 0 auto 45px;
+      text-align: center;
+    }
+
+    .contact-intro p {
+      max-width: 650px;
+      margin: 12px auto 0;
+      line-height: 1.8;
+      opacity: .75;
+    }
+
+
+    /* =========================================
+       CONTACT INFORMATION CARDS
+    ========================================== */
+
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .contact-info-card {
+      padding: 25px;
+      text-align: center;
+    }
+
+    .contact-icon {
+      width: 52px;
+      height: 52px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 14px;
+
+      background: rgba(128,128,128,.10);
+
+      margin-bottom: 15px;
+    }
+
+    .contact-icon .ic {
+      width: 25px;
+      height: 25px;
+    }
+
+    .contact-info-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .contact-info-card p {
+      margin: 0;
+      line-height: 1.7;
+      opacity: .75;
+    }
+
+    .contact-info-card a {
+      text-decoration: none;
+    }
+
+
+    /* =========================================
+       CONTACT MAIN GRID
+    ========================================== */
+
+    .contact-main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+
+    /* =========================================
+       FORM
+    ========================================== */
+
+    .contact-form {
+      padding: 30px;
+    }
+
+    .contact-form h2 {
+      margin-bottom: 8px;
+    }
+
+    .form-intro {
+      margin-bottom: 25px;
+      line-height: 1.7;
+      opacity: .72;
+    }
+
+    .fg {
+      margin-bottom: 18px;
+    }
+
+    .fg label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 600;
+    }
+
+    .fg input,
+    .fg textarea,
+    .fg select {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .fg textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .required {
+      opacity: .55;
+      font-size: .85rem;
+    }
+
+
+    /* =========================================
+       OFFICE DETAILS
+    ========================================== */
+
+    .office-card {
+      padding: 30px;
+    }
+
+    .office-card h2 {
+      margin-bottom: 20px;
+    }
+
+    .office-detail {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .office-detail .ic {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .office-detail h4 {
+      margin: 0 0 4px;
+    }
+
+    .office-detail p {
+      margin: 0;
+      line-height: 1.6;
+      opacity: .75;
+    }
+
+
+    /* =========================================
+       OFFICE TIMINGS
+    ========================================== */
+
+    .timings {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(128,128,128,.2);
+    }
+
+    .timing-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 9px 0;
+    }
+
+    .timing-row span:last-child {
+      opacity: .7;
+      text-align: right;
+    }
+
+
+    /* =========================================
+       SOCIAL LINKS
+    ========================================== */
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .social-links a {
+      padding: 9px 15px;
+      border-radius: 20px;
+      border: 1px solid rgba(128,128,128,.2);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: transform .2s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================================
+       MAP
+    ========================================== */
+
+    .map-section {
+      margin-top: 35px;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+
+    /* =========================================
+       BRANCHES
+    ========================================== */
+
+    .branch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .branch-card {
+      padding: 25px;
+    }
+
+    .branch-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .branch-card p {
+      line-height: 1.7;
+      opacity: .75;
+    }
+
+    .branch-card .branch-time {
+      font-size: .9rem;
+      margin-top: 12px;
+    }
+
+
+    /* =========================================
+       FAQ / CTA
+    ========================================== */
+
+    .contact-cta {
+      padding: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .contact-cta p {
+      margin: 7px 0 0;
+      opacity: .75;
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+    ========================================== */
+
+    @media (max-width: 900px) {
+
+      .contact-info-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .contact-main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .branch-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .contact-info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .branch-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-form,
+      .office-card {
+        padding: 22px;
+      }
+
+      .contact-cta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .timing-row {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .timing-row span:last-child {
+        text-align: left;
+      }
+
+      .map-container {
+        height: 300px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       SVG ICONS
+  ========================================== -->
+
+  <svg
+    style="display:none"
+    aria-hidden="true"
+  >
+
+    <symbol
+      id="i-sun"
+      viewBox="0 0 24 24"
+    >
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+    </symbol>
+
+
+    <symbol
+      id="i-moon"
+      viewBox="0 0 24 24"
+    >
+      <path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/>
+    </symbol>
+
+
+    <symbol
+      id="i-user"
+      viewBox="0 0 24 24"
+    >
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>
+    </symbol>
+
+
+    <symbol
+      id="i-heart"
+      viewBox="0 0 24 24"
+    >
+      <path d="M12 21s-8-5.3-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.7-8 11-8 11z"/>
+    </symbol>
+
+
+    <symbol
+      id="i-pin"
+      viewBox="0 0 24 24"
+    >
+      <path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/>
+      <circle cx="12" cy="10" r="2.5"/>
+    </symbol>
+
+
+    <symbol
+      id="i-mail"
+      viewBox="0 0 24 24"
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2"/>
+      <path d="M3 7l9 6 9-6"/>
+    </symbol>
+
+
+    <symbol
+      id="i-phone"
+      viewBox="0 0 24 24"
+    >
+      <path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/>
+    </symbol>
+
+
+    <symbol
+      id="i-menu"
+      viewBox="0 0 24 24"
+    >
+      <path d="M4 6h16M4 12h16M4 18h16"/>
+    </symbol>
+
+
+    <symbol
+      id="i-chart"
+      viewBox="0 0 24 24"
+    >
+      <path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>
+    </symbol>
+
+
+    <symbol
+      id="i-cal"
+      viewBox="0 0 24 24"
+    >
+      <rect x="3" y="5" width="18" height="16" rx="2"/>
+      <path d="M3 10h18M8 3v4M16 3v4"/>
+    </symbol>
+
+
+    <symbol
+      id="i-key"
+      viewBox="0 0 24 24"
+    >
+      <circle cx="8" cy="15" r="4"/>
+      <path d="M11 12l9-9M16 7l3 3"/>
+    </symbol>
+
+  </svg>
+
+
+  <header class="nav">
+  <div class="wrap">
+
+    <!-- LOGO -->
+    <a class="logo" href="index.html">
+      <img src="assets/logo.png" alt="Brand Logo" width="38" height="38">
+<span class="logo-text">Estatery</span>    </a>
+
+    <!-- NAVIGATION -->
+    <ul class="links" id="links">
+
+      <li>
+        <a class="l " href="index.html">Home</a>
+      </li>
+
+      <li>
+        <a class="l " href="home-2.html">Home 2</a>
+      </li>
+
+      <li>
+        <a class="l" href="about.html">About</a>
+      </li>
+
+      <li>
+        <a class="l" href="properties.html">Properties</a>
+      </li>
+
+      <li>
+        <a class="l " href="blog.html">Blog</a>
+      </li>
+
+      <li>
+        <a class="l act" href="contact.html">Contact</a>
+      </li>
+
+    </ul>
+
+    <!-- ACTIONS -->
+    <div class="acts">
+
+      <!-- DARK / LIGHT MODE -->
+      <button
+        class="ib"
+        data-act="theme"
+        aria-label="Toggle Dark/Light Mode"
+        title="Toggle Theme"
+      >
+        <svg
+          class="ic sun"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="5"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+
+        <svg
+          class="ic moon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- RTL / LTR -->
+      <button
+        class="ib"
+        data-act="dir"
+        aria-label="Toggle RTL Direction"
+        title="RTL / LTR"
+      >
+        <b style="position:static;background:none;color:inherit;font-size:11px">
+          RTL
+        </b>
+      </button>
+
+      <!-- PROFILE -->
+      <div class="pf">
+
+        <button
+          class="ib"
+          data-act="pf"
+          aria-label="User Account Menu"
+          aria-haspopup="true"
+        >
+          <svg
+            class="ic"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+
+        <!-- PROFILE DROPDOWN -->
+        <div class="dd">
+
+          <div class="dropdown-header">
+            <h4>Estatery</h4>
+          </div>
+
+          <a href="login.html">Login</a>
+
+          <a href="login.html">Signup</a>
+
+          <a href="dashboard.html">User Dashboard</a>
+
+          <a href="admin-dashboard.html">Admin Dashboard</a>
+
+        </div>
+
+      </div>
+
+      <!-- MOBILE MENU -->
+      <button
+        class="ib burger"
+        data-act="menu"
+        aria-label="Toggle menu"
+      >
+        <svg
+          class="ic"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+
+
+  <!-- =========================================
+       MAIN
+  ========================================== -->
+
+  <main>
+
+<section
+  class="page-hero"
+  style="--hero-img: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1800&q=80')"
+>
+  <div class="hero-overlay"></div>
+
+  <div class="wrap hero-in">
+    <span class="eyebrow">GET IN TOUCH</span>
+
+    <h1>
+      Let's find<br>
+      your next place together.
+    </h1>
+
+    <p>
+      Have a question, need property guidance, or want to work with us?
+      Our team is here to help.
+    </p>
+
+    <a href="#contact-form" class="btn cta">
+      Contact Our Team →
+    </a>
+  </div>
+</section>
+  
+
+
+
+    <!-- =======================================
+         CONTACT INFORMATION
+    ======================================== -->
+
+    <section class="sec">
+
+      <div class="wrap">
+
+
+        <div class="contact-intro">
+
+          <span class="eyebrow">
+            CONTACT INFORMATION
+          </span>
+
+          <h2>
+            We'd love to hear from you
+          </h2>
+
+          <p>
+
+            Reach out to our team through phone, email or
+            the contact form. We aim to respond to enquiries
+            within one working day.
+
+          </p>
+
+        </div>
+
+
+
+        <div class="contact-info-grid">
+
+
+          <!-- ADDRESS -->
+
+          <div class="card contact-info-card">
+
+            <div class="contact-icon">
+
+              <svg
+                class="ic"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <use href="#i-pin"/>
+              </svg>
+
+            </div>
+
+            <h3>
+              Visit Our Office
+            </h3>
+
+            <p>
+              12 Mount Road,<br>
+              Teynampet,<br>
+              Chennai, Tamil Nadu 600018
+            </p>
+
+          </div>
+
+
+
+          <!-- PHONE -->
+
+          <div class="card contact-info-card">
+
+            <div class="contact-icon">
+
+              <svg
+                class="ic"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <use href="#i-phone"/>
+              </svg>
+
+            </div>
+
+            <h3>
+              Call Us
+            </h3>
+
+            <p>
+
+              <a href="tel:+919876543210">
+                +91 98765 43210
+              </a>
+
+              <br>
+
+              Mon - Sat, 9:00 AM - 6:00 PM
+
+            </p>
+
+          </div>
+
+
+
+          <!-- EMAIL -->
+
+          <div class="card contact-info-card">
+
+            <div class="contact-icon">
+
+              <svg
+                class="ic"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <use href="#i-mail"/>
+              </svg>
+
+            </div>
+
+            <h3>
+              Email Us
+            </h3>
+
+            <p>
+
+              <a href="mailto:hello@estatery.example">
+                hello@estatery.example
+              </a>
+
+              <br>
+
+              We reply within one working day.
+
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             FORM + OFFICE
+        ====================================== -->
+
+        <div class="contact-main-grid">
+
+
+          <!-- ===================================
+               CONTACT FORM
+          ==================================== -->
+
+          <form id="contact-form"
+            class="card contact-form"
+            data-toast="Message sent. We will reply soon."
+          >
+
+            <span class="eyebrow">
+              SEND A MESSAGE
+            </span>
+
+            <h2>
+              How can we help?
+            </h2>
+
+            <p class="form-intro">
+
+              Fill in the form below and our team will
+              get back to you as soon as possible.
+
+            </p>
+
+
+            <!-- NAME + EMAIL -->
+
+            <div class="grid g2">
+
+
+              <div class="fg">
+
+                <label for="name">
+                  Name
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Enter your name"
+                  required
+                >
+
+              </div>
+
+
+              <div class="fg">
+
+                <label for="email">
+                  Email
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                >
+
+              </div>
+
+            </div>
+
+
+
+            <!-- PHONE + SUBJECT -->
+
+            <div class="grid g2">
+
+
+              <div class="fg">
+
+                <label for="phone">
+                  Phone
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="+91 98765 43210"
+                  required
+                >
+
+              </div>
+
+
+              <div class="fg">
+
+                <label for="subject">
+                  Subject
+                  <span class="required">*</span>
+                </label>
+
+                <select
+                  id="subject"
+                  name="subject"
+                  required
+                >
+
+                  <option value="">
+                    Select a subject
+                  </option>
+
+                  <option value="property">
+                    Property enquiry
+                  </option>
+
+                  <option value="site-visit">
+                    Schedule a site visit
+                  </option>
+
+                  <option value="buying">
+                    Buying assistance
+                  </option>
+
+                  <option value="renting">
+                    Rental assistance
+                  </option>
+
+                  <option value="selling">
+                    Sell my property
+                  </option>
+
+                  <option value="general">
+                    General enquiry
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <div class="fg">
+
+              <label for="message">
+                Message
+                <span class="required">*</span>
+              </label>
+
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                placeholder="Tell us how we can help you..."
+                required
+              ></textarea>
+
+            </div>
+
+
+
+            <!-- SUBMIT -->
+
+            <button
+              class="btn"
+              type="submit"
+            >
+              Send Message
+            </button>
+
+          </form>
+
+
+
+          <!-- ===================================
+               OFFICE DETAILS
+          ==================================== -->
+
+          <div class="card office-card">
+
+            <span class="eyebrow">
+              OUR OFFICE
+            </span>
+
+            <h2>
+              Chennai Office
+            </h2>
+
+
+            <!-- ADDRESS -->
+
+            <div class="office-detail">
+
+              <svg
+                class="ic"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <use href="#i-pin"/>
+              </svg>
+
+              <div>
+
+                <h4>
+                  Address
+                </h4>
+
+                <p>
+                  12 Mount Road,<br>
+                  Teynampet,<br>
+                  Chennai, Tamil Nadu 600018
+                </p>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- PHONE -->
+
+            <div class="office-detail">
+
+              <svg
+                class="ic"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <use href="#i-phone"/>
+              </svg>
+
+              <div>
+
+                <h4>
+                  Phone
+                </h4>
+
+                <p>
+                  +91 98765 43210
+                </p>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="office-detail">
+
+              <svg
+                class="ic"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <use href="#i-mail"/>
+              </svg>
+
+              <div>
+
+                <h4>
+                  Email
+                </h4>
+
+                <p>
+                  hello@estatery.example
+                </p>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- OFFICE TIMINGS -->
+
+            <div class="timings">
+
+              <h3>
+                Office Timings
+              </h3>
+
+
+              <div class="timing-row">
+
+                <span>
+                  Monday - Friday
+                </span>
+
+                <span>
+                  9:00 AM - 6:00 PM
+                </span>
+
+              </div>
+
+
+              <div class="timing-row">
+
+                <span>
+                  Saturday
+                </span>
+
+                <span>
+                  10:00 AM - 4:00 PM
+                </span>
+
+              </div>
+
+
+              <div class="timing-row">
+
+                <span>
+                  Sunday
+                </span>
+
+                <span>
+                  Closed
+                </span>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- SOCIAL -->
+
+            <div>
+
+              <h3 style="margin-top:25px">
+                Follow Us
+              </h3>
+
+
+              <div class="social-links">
+
+                <a
+                  href="#"
+                  aria-label="Instagram"
+                >
+                  Instagram
+                </a>
+
+                <a
+                  href="#"
+                  aria-label="Facebook"
+                >
+                  Facebook
+                </a>
+
+                <a
+                  href="#"
+                  aria-label="LinkedIn"
+                >
+                  LinkedIn
+                </a>
+
+                <a
+                  href="#"
+                  aria-label="YouTube"
+                >
+                  YouTube
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================
+         MAP
+    ======================================== -->
+
+    <section class="sec map-section">
+
+      <div class="wrap">
+
+        <div class="head">
+
+          <div>
+
+            <span class="eyebrow">
+              FIND US
+            </span>
+
+            <h2>
+              Our Location
+            </h2>
+
+            <p>
+              Visit our Chennai office for property consultations
+              and scheduled meetings.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="card map-container">
+
+          <iframe
+            src="https://www.google.com/maps?q=Mount%20Road%2C%20Chennai%2C%20Tamil%20Nadu&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Estatery Chennai office location"
+          >
+          </iframe>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================
+         BRANCHES
+    ======================================== -->
+
+    <section class="sec">
+
+      <div class="wrap">
+
+        <div class="head">
+
+          <div>
+
+            <span class="eyebrow">
+              OUR PRESENCE
+            </span>
+
+            <h2>
+              Office & Branch Details
+            </h2>
+
+            <p>
+              Our growing team helps customers explore
+              properties across Tamil Nadu.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="branch-grid">
+
+
+          <!-- CHENNAI -->
+
+          <div class="card branch-card">
+
+            <span class="badge">
+              HEAD OFFICE
+            </span>
+
+            <h3>
+              Chennai
+            </h3>
+
+            <p>
+
+              12 Mount Road,<br>
+              Teynampet,<br>
+              Chennai, Tamil Nadu 600018
+
+            </p>
+
+            <p class="branch-time">
+
+              <strong>
+                Timings:
+              </strong>
+
+              Mon - Fri, 9 AM - 6 PM
+
+            </p>
+
+          </div>
+
+
+
+          <!-- COIMBATORE -->
+
+          <div class="card branch-card">
+
+            <span class="badge">
+              BRANCH
+            </span>
+
+            <h3>
+              Coimbatore
+            </h3>
+
+            <p>
+
+              42 Avinashi Road,<br>
+              Peelamedu,<br>
+              Coimbatore, Tamil Nadu 641004
+
+            </p>
+
+            <p class="branch-time">
+
+              <strong>
+                Timings:
+              </strong>
+
+              Mon - Sat, 9 AM - 5 PM
+
+            </p>
+
+          </div>
+
+
+
+          <!-- MADURAI -->
+
+          <div class="card branch-card">
+
+            <span class="badge">
+              BRANCH
+            </span>
+
+            <h3>
+              Madurai
+            </h3>
+
+            <p>
+
+              18 Anna Nagar Main Road,<br>
+              Anna Nagar,<br>
+              Madurai, Tamil Nadu 625020
+
+            </p>
+
+            <p class="branch-time">
+
+              <strong>
+                Timings:
+              </strong>
+
+              Mon - Sat, 9 AM - 5 PM
+
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =======================================
+         CTA
+    ======================================== -->
+
+    <section class="sec">
+
+      <div class="wrap">
+
+        <div class="card contact-cta">
+
+          <div>
+
+            <span class="eyebrow">
+              NEED HELP?
+            </span>
+
+            <h2>
+              Let's find the right property for you.
+            </h2>
+
+            <p>
+              Browse available properties or speak with our team.
+            </p>
+
+          </div>
+
+
+          <div>
+
+            <a
+              href="properties.html"
+              class="btn"
+            >
+              Explore Properties
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer class="ft">
+
+    <div class="wrap">
+
+      <div class="grid g4">
+
+
+        <!-- BRAND -->
+
+        <div>
+
+          <h3>
+            Estatery
+          </h3>
+
+          <p>
+            Find, compare and visit homes with confidence
+            across Tamil Nadu.
+          </p>
+
+        </div>
+
+
+
+        <!-- EXPLORE -->
+
+        <div>
+
+          <h3>
+            Explore
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="properties.html">
+                Properties
+              </a>
+            </li>
+
+            <li>
+              <a href="index.html#agents">
+                Agents
+              </a>
+            </li>
+
+            <li>
+              <a href="locations.html">
+                Locations
+              </a>
+            </li>
+
+            <li>
+              <a href="pricing.html">
+                Pricing
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+
+        <!-- COMPANY -->
+
+        <div>
+
+          <h3>
+            Company
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="about.html">
+                About us
+              </a>
+            </li>
+
+            <li>
+              <a href="blog.html">
+                Blog
+              </a>
+            </li>
+
+            <li>
+              <a href="contact.html">
+                Contact
+              </a>
+            </li>
+
+            <li>
+              <a href="index.html#coming-soon">
+                Coming soon
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+
+        <!-- CONTACT -->
+
+        <div>
+
+          <h3>
+            Contact
+          </h3>
+
+          <ul>
+
+            <li>
+
+              <svg
+                class="ic"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <use href="#i-mail"/>
+              </svg>
+
+              hello@estatery.example
+
+            </li>
+
+
+            <li>
+
+              <svg
+                class="ic"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <use href="#i-phone"/>
+              </svg>
+
+              +91 98765 43210
+
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="bt">
+
+        &copy; 2026 Estatery.
+        All rights reserved.
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+</body>
+
+</html>

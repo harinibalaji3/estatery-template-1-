@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Luxury &amp; Premium Properties | Estatery</title>
+  <meta name="description" content="Estatery niche luxury real estate platform: Exclusive coastal villas, penthouses, and advisory services.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    try{
+      var t=localStorage.getItem("theme"),d=localStorage.getItem("dir");
+      document.documentElement.dataset.theme=t||"light";
+      document.documentElement.dir=d||"ltr";
+    }catch(e){}
+  </script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <!-- SVG Icon Sprite -->
+  <svg style="display:none" aria-hidden="true">
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.3-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.7-8 11-8 11z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 00-3-3h-7v5"/></symbol>
+    <symbol id="i-bath" viewBox="0 0 24 24"><path d="M4 12h16v3a4 4 0 01-4 4H8a4 4 0 01-4-4zM6 12V6a2 2 0 014 0"/></symbol>
+    <symbol id="i-area" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h6v11"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-cmp" viewBox="0 0 24 24"><path d="M7 4v16M17 4v16M3 8l4-4 4 4M13 16l4 4 4-4"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-5 7-5s7 1.5 7 5M17 4.5a3.5 3.5 0 010 7M22 20c0-2.500-1.500-4-4-4.700"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V3h9l9 9-9 9z"/><circle cx="7.500" cy="7.500" r="1"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  </svg>
+
+  <header class="nav">
+  <div class="wrap">
+
+    <!-- LOGO -->
+    <a class="logo" href="index.html">
+      <img src="assets/logo.png" alt="Brand Logo" width="38" height="38">
+<span class="logo-text">Estatery</span>    </a>
+
+    <!-- NAVIGATION -->
+    <ul class="links" id="links">
+
+      <li>
+        <a class="l " href="index.html">Home</a>
+      </li>
+
+      <li>
+        <a class="l act" href="home-2.html">Home 2</a>
+      </li>
+
+      <li>
+        <a class="l" href="about.html">About</a>
+      </li>
+
+      <li>
+        <a class="l" href="properties.html">Properties</a>
+      </li>
+
+      <li>
+        <a class="l" href="blog.html">Blog</a>
+      </li>
+
+      <li>
+        <a class="l" href="contact.html">Contact</a>
+      </li>
+
+    </ul>
+
+    <!-- ACTIONS -->
+    <div class="acts">
+
+      <!-- DARK / LIGHT MODE -->
+      <button
+        class="ib"
+        data-act="theme"
+        aria-label="Toggle Dark/Light Mode"
+        title="Toggle Theme"
+      >
+        <svg
+          class="ic sun"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="5"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+
+        <svg
+          class="ic moon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- RTL / LTR -->
+      <button
+        class="ib"
+        data-act="dir"
+        aria-label="Toggle RTL Direction"
+        title="RTL / LTR"
+      >
+        <b style="position:static;background:none;color:inherit;font-size:11px">
+          RTL
+        </b>
+      </button>
+
+      <!-- PROFILE -->
+      <div class="pf">
+
+        <button
+          class="ib"
+          data-act="pf"
+          aria-label="User Account Menu"
+          aria-haspopup="true"
+        >
+          <svg
+            class="ic"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+
+        <!-- PROFILE DROPDOWN -->
+        <div class="dd">
+
+          <div class="dropdown-header">
+            <h4>Estatery</h4>
+          </div>
+
+          <a href="login.html">Login</a>
+
+          <a href="login.html">Signup</a>
+
+          <a href="dashboard.html">User Dashboard</a>
+
+          <a href="admin-dashboard.html">Admin Dashboard</a>
+
+        </div>
+
+      </div>
+
+      <!-- MOBILE MENU -->
+      <button
+        class="ib burger"
+        data-act="menu"
+        aria-label="Toggle menu"
+      >
+        <svg
+          class="ic"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+
+
+  <main>
+    <!-- 1. Product / Niche Hero -->
+    <section class="hero">
+      <div class="hbg" aria-hidden="true">
+        <i style="background-image:url(https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1800&q=75)"></i>
+        <i style="background-image:url(https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1800&q=75)"></i>
+        <i style="background-image:url(https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1800&q=75)"></i>
+      </div>
+      <div class="wrap split">
+        <div>
+          <h1>Luxury coastal villas and sea-facing homes</h1>
+          <p>An intelligence-driven real estate platform for high-net-worth individuals, investors, and luxury agencies. Access vetted, off-market coastal estates with complete privacy and legal verification.</p>
+          <a class="btn g" href="properties.html?type=Villa">Explore luxury estates</a>
+          <div class="stats">
+            <div><b data-n="140" data-s="">0</b><span>Verified villas</span></div>
+            <div><b data-n="25" data-s=" yrs">0</b><span>Market leadership</span></div>
+          </div>
+        </div>
+        <div class="card" style="border-radius:20px;overflow:hidden;aspect-ratio:4/3">
+          <span class="im">
+            <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Property illustration">
+              <defs>
+                <linearGradient id="g5" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#e6a9a0"/><stop offset="1" stop-color="#f9e6e3"/>
+                </linearGradient>
+              </defs>
+              <rect width="800" height="600" fill="url(#g5)"/>
+              <circle cx="330" cy="50" r="26" fill="#fff" opacity=".7"/>
+              <rect y="205" width="800" height="50" fill="#5a2019" opacity=".35"/>
+              <path d="M70 205V150 l60-36 60 36z" fill="#5a2019" opacity=".5"/>
+              <rect x="110" y="70" width="190" height="135" rx="3" fill="#5a2019"/>
+              <rect x="130" y="96" width="26" height="30" rx="2" fill="#f9e6e3" opacity=".85"/>
+              <rect x="130" y="150" width="26" height="30" rx="2" fill="#f9e6e3" opacity=".85"/>
+              <rect x="190" y="96" width="26" height="30" rx="2" fill="#f9e6e3" opacity=".85"/>
+              <rect x="190" y="150" width="26" height="30" rx="2" fill="#f9e6e3" opacity=".85"/>
+              <rect x="250" y="96" width="26" height="30" rx="2" fill="#f9e6e3" opacity=".85"/>
+              <rect x="250" y="150" width="26" height="30" rx="2" fill="#f9e6e3" opacity=".85"/>
+              <rect x="188" y="168" width="34" height="37" fill="#f9e6e3" opacity=".6"/>
+            </svg>
+            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=75" alt="Property photo" loading="lazy" onerror="this.remove()">
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Problem → Solution Section -->
+    <section class="sec alt">
+      <div class="wrap">
+        <div class="head rv">
+          <h2>Eliminating friction in premium real estate</h2>
+          <p>Traditional high-end real estate transactions are fraught with opacity, slow deal cycles, and unverified listings.</p>
+        </div>
+        <div class="grid g2">
+          <div class="card pad rv">
+            <h3 style="color:#e53e3e;margin-bottom:12px">The Challenge</h3>
+            <p>Buying or managing luxury properties often involves unverified listing data, invasive public exposure, tedious legal title checks, and fragmented communication between wealth managers, buyers, and sellers.</p>
+          </div>
+          <div class="card pad rv">
+            <h3 style="color:#2e7d32;margin-bottom:12px">The Estatery Solution</h3>
+            <p>Estatery streamlines high-value transactions through end-to-end title verification, private off-market matchmaking, instant automated valuation reports, and dedicated private viewing coordination.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Property Types Navigation -->
+    <section class="sec">
+      <div class="wrap">
+        <div class="head rv">
+          <h2>Browse by property type</h2>
+          <p>Choose the kind of luxury home you want to explore.</p>
+        </div>
+        <div class="grid g4">
+          <a href="properties.html?type=Villa" class="card pad hov rv">
+            <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-home"/></svg></div>
+            <h3>Villa</h3>
+            <p>140 listings</p>
+          </a>
+          <a href="properties.html?type=Apartment" class="card pad hov rv">
+            <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-list"/></svg></div>
+            <h3>Apartment</h3>
+            <p>620 listings</p>
+          </a>
+          <a href="properties.html?type=House" class="card pad hov rv">
+            <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-key"/></svg></div>
+            <h3>House</h3>
+            <p>310 listings</p>
+          </a>
+          <a href="properties.html?type=Plot" class="card pad hov rv">
+            <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-pin"/></svg></div>
+            <h3>Plot</h3>
+            <p>95 listings</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Feature Highlights Section -->
+    <section class="sec alt">
+      <div class="wrap">
+        <div class="head rv">
+          <h2>Platform feature highlights</h2>
+          <p>Built exclusively for luxury property acquisition and portfolio management.</p>
+        </div>
+        <div class="grid g3">
+          <div class="card pad rv">
+            <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg></div>
+            <h3>Verified Title Escrow</h3>
+            <p>Every estate undergoes 100% legal title auditing, encumbrance verification, and coastal zone regulatory checks prior to publication.</p>
+          </div>
+          <div class="card pad rv">
+            <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-eye"/></svg></div>
+            <h3>Private Off-Market Vault</h3>
+            <p>Access exclusive prime estates discreetly without public index listings, protecting buyer and seller identity.</p>
+          </div>
+          <div class="card pad rv">
+            <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chart"/></svg></div>
+            <h3>Real-Time Yield Valuation</h3>
+            <p>Automated ROI projections and seasonal rental yield estimates calculated via historical coastal transaction datasets.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signature Collection -->
+    <section class="sec">
+      <div class="wrap">
+        <div class="head rv">
+          <h2>Signature collection</h2>
+          <p>Our most requested premium homes.</p>
+        </div>
+        <div class="grid g3" id="all">
+          <article class="card pc rv" data-id="2" data-title="Palm Grove Villa" data-loc="ECR" data-type="Villa" data-price="32000000" data-fmt="₹3.20 Cr" data-am="pool,garden,parking,security">
+            <div class="ph">
+              <span class="im">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Property illustration">
+                  <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9b8e0"/><stop offset="1" stop-color="#e6ebf8"/></linearGradient></defs>
+                  <rect width="400" height="250" fill="url(#g2)"/><circle cx="330" cy="50" r="26" fill="#fff" opacity=".7"/><rect y="205" width="400" height="50" fill="#1f2f5c" opacity=".35"/><path d="M70 205V150 l60-36 60 36z" fill="#1f2f5c" opacity=".5"/><rect x="110" y="70" width="190" height="135" rx="3" fill="#1f2f5c"/><rect x="130" y="96" width="26" height="30" rx="2" fill="#e6ebf8" opacity=".85"/><rect x="130" y="150" width="26" height="30" rx="2" fill="#e6ebf8" opacity=".85"/><rect x="190" y="96" width="26" height="30" rx="2" fill="#e6ebf8" opacity=".85"/><rect x="190" y="150" width="26" height="30" rx="2" fill="#e6ebf8" opacity=".85"/><rect x="250" y="96" width="26" height="30" rx="2" fill="#e6ebf8" opacity=".85"/><rect x="250" y="150" width="26" height="30" rx="2" fill="#e6ebf8" opacity=".85"/><rect x="188" y="168" width="34" height="37" fill="#e6ebf8" opacity=".6"/>
+                </svg>
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=75" alt="Property photo" loading="lazy" onerror="this.remove()">
+              </span>
+              <span class="tag">For Sale</span>
+              <div class="pa">
+                <button data-fav="2" aria-label="Save to favorites"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-heart"/></svg></button>
+                <button class="c" data-cmp="2" aria-label="Add to compare"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cmp"/></svg></button>
+              </div>
+            </div>
+            <div class="pb">
+              <div class="pr">₹3.20 Cr</div>
+              <h3><a href="property-details.html">Palm Grove Villa</a></h3>
+              <div class="lc"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-pin"/></svg> ECR, Chennai</div>
+              <div class="meta">
+                <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bed"/></svg> 4 Beds</span>
+                <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bath"/></svg> 4 Baths</span>
+                <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-area"/></svg> 3200 sq ft</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card pc rv" data-id="6" data-title="Harbour Penthouse" data-loc="Besant Nagar" data-type="Villa" data-price="45000000" data-fmt="₹4.50 Cr" data-am="pool,gym,parking,garden,security">
+            <div class="ph">
+              <span class="im">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Property illustration">
+                  <defs><linearGradient id="g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9cc9c0"/><stop offset="1" stop-color="#e7f1ee"/></linearGradient></defs>
+                  <rect width="400" height="250" fill="url(#g6)"/><circle cx="330" cy="50" r="26" fill="#fff" opacity=".7"/><rect y="205" width="400" height="50" fill="#0b3b33" opacity=".35"/><rect x="300" y="110" width="60" height="95" fill="#0b3b33" opacity=".8"/><path d="M70 205V130 l60-36 60 36z" fill="#0b3b33" opacity=".5"/><rect x="110" y="70" width="190" height="135" rx="3" fill="#0b3b33"/><rect x="130" y="96" width="26" height="30" rx="2" fill="#e7f1ee" opacity=".85"/><rect x="130" y="150" width="26" height="30" rx="2" fill="#e7f1ee" opacity=".85"/><rect x="190" y="96" width="26" height="30" rx="2" fill="#e7f1ee" opacity=".85"/><rect x="190" y="150" width="26" height="30" rx="2" fill="#e7f1ee" opacity=".85"/><rect x="250" y="96" width="26" height="30" rx="2" fill="#e7f1ee" opacity=".85"/><rect x="250" y="150" width="26" height="30" rx="2" fill="#e7f1ee" opacity=".85"/><rect x="188" y="168" width="34" height="37" fill="#e7f1ee" opacity=".6"/>
+                </svg>
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=75" alt="Property photo" loading="lazy" onerror="this.remove()">
+              </span>
+              <span class="tag">For Sale</span>
+              <div class="pa">
+                <button data-fav="6" aria-label="Save to favorites"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-heart"/></svg></button>
+                <button class="c" data-cmp="6" aria-label="Add to compare"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cmp"/></svg></button>
+              </div>
+            </div>
+            <div class="pb">
+              <div class="pr">₹4.50 Cr</div>
+              <h3><a href="property-details.html">Harbour Penthouse</a></h3>
+              <div class="lc"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-pin"/></svg> Besant Nagar, Chennai</div>
+              <div class="meta">
+                <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bed"/></svg> 4 Beds</span>
+                <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bath"/></svg> 5 Baths</span>
+                <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-area"/></svg> 4100 sq ft</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card pc rv" data-id="4" data-title="Lakeview Row House" data-loc="Velachery" data-type="House" data-price="9800000" data-fmt="₹98 L" data-am="garden,parking">
+            <div class="ph">
+              <span class="im">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Property illustration">
+                  <defs><linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd0a8"/><stop offset="1" stop-color="#e5f4e8"/></linearGradient></defs>
+                  <rect width="400" height="250" fill="url(#g4)"/><circle cx="330" cy="50" r="26" fill="#fff" opacity=".7"/><rect y="205" width="400" height="50" fill="#17452a" opacity=".35"/><path d="M70 205V150 l60-36 60 36z" fill="#17452a" opacity=".5"/><rect x="110" y="70" width="190" height="135" rx="3" fill="#17452a"/><rect x="130" y="96" width="26" height="30" rx="2" fill="#e5f4e8" opacity=".85"/><rect x="130" y="150" width="26" height="30" rx="2" fill="#e5f4e8" opacity=".85"/><rect x="190" y="96" width="26" height="30" rx="2" fill="#e5f4e8" opacity=".85"/><rect x="190" y="150" width="26" height="30" rx="2" fill="#e5f4e8" opacity=".85"/><rect x="250" y="96" width="26" height="30" rx="2" fill="#e5f4e8" opacity=".85"/><rect x="250" y="150" width="26" height="30" rx="2" fill="#e5f4e8" opacity=".85"/><rect x="188" y="168" width="34" height="37" fill="#e5f4e8" opacity=".6"/>
+                </svg>
+                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=75" alt="Property photo" loading="lazy" onerror="this.remove()">
+              </span>
+              <span class="tag">For Sale</span>
+              <div class="pa">
+                <button data-fav="4" aria-label="Save to favorites"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-heart"/></svg></button>
+                <button class="c" data-cmp="4" aria-label="Add to compare"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cmp"/></svg></button>
+              </div>
+            </div>
+            <div class="pb">
+              <div class="pr">₹98 L</div>
+              <h3><a href="property-details.html">Lakeview Row House</a></h3>
+              <div class="lc"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-pin"/></svg> Velachery, Chennai</div>
+              <div class="meta">
+                <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bed"/></svg> 3 Beds</span>
+                <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bath"/></svg> 3 Baths</span>
+                <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-area"/></svg> 1800 sq ft</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Use Cases / Industries Section -->
+    <section class="sec alt">
+      <div class="wrap">
+        <div class="head rv">
+          <h2>Tailored workflows for luxury stakeholders</h2>
+          <p>Purpose-built tools for buyers, sellers, luxury developers, and family offices.</p>
+        </div>
+        <div class="grid g3">
+          <div class="card pad rv">
+            <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-user"/></svg></div>
+            <h3>Private Investors &amp; HNIs</h3>
+            <p>Direct access to confidential off-market beachfront plots and estates with complete privacy protection and escrow facilitation.</p>
+          </div>
+          <div class="card pad rv">
+            <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-users"/></svg></div>
+            <h3>Family Offices</h3>
+            <p>Portfolio aggregation, consolidated asset tracking, tax impact analysis, and estate management integration.</p>
+          </div>
+          <div class="card pad rv">
+            <div class="ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-home"/></svg></div>
+            <h3>Boutique Luxury Agencies</h3>
+            <p>Co-brokering portal, client preference matching engine, and branded luxury pitch presentation tools.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Pricing Teaser Section -->
+    <section class="sec">
+      <div class="wrap">
+        <div class="head rv">
+          <h2>Transparent membership plans</h2>
+          <p>Flexible tier access for individual buyers, investors, and enterprise advisory firms.</p>
+        </div>
+        <div class="grid g3">
+          <div class="card pad rv">
+            <h3>Starter Advisory</h3>
+            <div class="pr" style="font-size:2rem;margin:12px 0">₹15,000 <span style="font-size:0.9rem;font-weight:400">/ mo</span></div>
+            <p style="margin-bottom:16px">For buyers seeking curated luxury listings and verified title support.</p>
+            <ul style="list-style:none;padding:0;margin-bottom:20px;line-height:2">
+              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg> Access verified listings</li>
+              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg> Up to 3 site visits / month</li>
+              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg> Basic valuation reports</li>
+            </ul>
+            <a class="btn sm" href="pricing.html" style="width:100%;text-align:center">Get Started</a>
+          </div>
+
+          <div class="card pad rv" style="border:2px solid var(--accent, #1f2f5c)">
+            <span class="tag" style="position:static;display:inline-block;margin-bottom:8px">Most Popular</span>
+            <h3>Private Vault Access</h3>
+            <div class="pr" style="font-size:2rem;margin:12px 0">₹45,000 <span style="font-size:0.9rem;font-weight:400">/ mo</span></div>
+            <p style="margin-bottom:16px">Exclusive for high-net-worth buyers seeking off-market properties.</p>
+            <ul style="list-style:none;padding:0;margin-bottom:20px;line-height:2">
+              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg> Off-market private vault</li>
+              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg> Dedicated senior advisor</li>
+              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg> Priority private viewings</li>
+            </ul>
+            <a class="btn cta sm" href="pricing.html" style="width:100%;text-align:center">Start 14-Day Trial</a>
+          </div>
+
+          <div class="card pad rv">
+            <h3>Institutional &amp; Agency</h3>
+            <div class="pr" style="font-size:2rem;margin:12px 0">Custom</div>
+            <p style="margin-bottom:16px">Custom enterprise solution for developers, agencies, and wealth managers.</p>
+            <ul style="list-style:none;padding:0;margin-bottom:20px;line-height:2">
+              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg> Multi-agent seat licenses</li>
+              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg> Full analytics &amp; API access</li>
+              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg> Co-branding options</li>
+            </ul>
+            <a class="btn sm" href="contact.html" style="width:100%;text-align:center">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Testimonials Section -->
+    <section class="sec alt">
+      <div class="wrap">
+        <div class="head rv">
+          <h2>Trusted by industry leaders</h2>
+          <p>What high-net-worth clients and wealth advisors say about Estatery.</p>
+        </div>
+        <div class="grid g2">
+          <div class="card pad rv">
+            <p style="font-style:italic;margin-bottom:16px">"Estatery helped us acquire our beach villa on ECR with complete discretion. The verified title documentation saved us weeks of legal back-and-forth."</p>
+            <b>— Rajesh Subramanian</b>
+            <span style="display:block;font-size:0.85rem;opacity:0.8">Managing Director, Apex Capital</span>
+          </div>
+          <div class="card pad rv">
+            <p style="font-style:italic;margin-bottom:16px">"The yield analysis and private vault listings offered by Estatery are unmatched. It is our primary platform for sourcing luxury assets in South India."</p>
+            <b>— Ananya Rao</b>
+            <span style="display:block;font-size:0.85rem;opacity:0.8">Senior Partner, Horizon Wealth Management</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Demo / Trial CTA Section -->
+    <section class="sec">
+      <div class="wrap card pad center rv" style="padding:56px 24px">
+        <h2>Schedule a private demo or request off-market access</h2>
+        <p style="margin:12px auto 24px;max-width:600px">Experience how Estatery streamlines luxury real estate acquisition. Book a private presentation with a senior advisor today.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a class="btn cta" href="contact.html">Request Demo <svg class="ic flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn" href="login.html">Start Free Trial</a>
+        </div>
+      </div>
+    </section>
+  <section class="sec alt" id="hub">
+  <div class="wrap">
+    <div class="head center">
+      <h2>Agents, selling and what is coming next</h2>
+      <p>Pick one to see the details right here.</p>
+    </div>
+   <div class="hub-tabs" role="tablist">
+
+  <button
+    type="button"
+    role="tab"
+    data-hub="agents"
+    aria-selected="true"
+    class="active">
+    Meet our agents
+  </button>
+
+  <button
+    type="button"
+    role="tab"
+    data-hub="sell-rent"
+    aria-selected="false">
+    Sell / Rent
+  </button>
+
+  <button
+    type="button"
+    role="tab"
+    data-hub="coming-soon"
+    aria-selected="false">
+    Coming soon
+  </button>
+
+</div>
+    <p class="hub-hint" id="hub-hint">Select a button above.</p>
+<div class="hub-panel" id="agents">      <div class="grid g4"><div class="card pad center hov hub-agent"><div class="av">P<img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=75" alt="Priya Raman" loading="lazy" onerror="this.remove()"></div><h3>Priya Raman</h3><p style="margin:4px auto 14px">Apartments, Anna Nagar</p><a class="btn o sm" href="contact.html">Contact</a></div><div class="card pad center hov hub-agent"><div class="av">K<img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=75" alt="Karthik Subbu" loading="lazy" onerror="this.remove()"></div><h3>Karthik Subbu</h3><p style="margin:4px auto 14px">Villas, ECR</p><a class="btn o sm" href="contact.html">Contact</a></div><div class="card pad center hov hub-agent"><div class="av">M<img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=75" alt="Meera Iyer" loading="lazy" onerror="this.remove()"></div><h3>Meera Iyer</h3><p style="margin:4px auto 14px">Plots, Mahabalipuram</p><a class="btn o sm" href="contact.html">Contact</a></div><div class="card pad center hov hub-agent"><div class="av">A<img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=75" alt="Arjun Das" loading="lazy" onerror="this.remove()"></div><h3>Arjun Das</h3><p style="margin:4px auto 14px">Rentals, OMR</p><a class="btn o sm" href="contact.html">Contact</a></div></div>
+    </div>
+    <div class="hub-panel" id="sell-rent" hidden>
+      <form class="card pad" style="max-width:760px;margin:auto" data-toast="Listing submitted for review.">
+        <h3 style="margin-bottom:18px">Sell or rent your property</h3>
+        <div class="grid g2">
+          <div class="fg"><label>Listing type</label><select><option>Sell</option><option>Rent</option></select></div>
+          <div class="fg"><label>Property type</label><select><option>Apartment</option><option>Villa</option><option>House</option><option>Plot</option></select></div>
+          <div class="fg"><label>Location</label><input required></div>
+          <div class="fg"><label>Expected price</label><input type="number" required></div>
+          <div class="fg"><label>Bedrooms</label><input type="number" min="0"></div>
+          <div class="fg"><label>Area (sq ft)</label><input type="number"></div>
+        </div>
+        <div class="fg"><label>Description</label><textarea rows="4"></textarea></div>
+        <button class="btn">Submit listing</button>
+      </form>
+    </div>
+    <div class="hub-panel" id="coming-soon" hidden>
+      <div class="card pad center" style="max-width:640px;margin:auto">
+        <h3>Something new is on the way</h3>
+        <p style="margin:10px auto 0">Our new rental marketplace launches soon. Leave your email and we will notify you.</p>
+        <form class="hub-form" data-toast="You are on the list.">
+          <input type="email" placeholder="Your email" required aria-label="Email">
+          <button class="btn">Notify me</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+  <!-- Footer -->
+  <footer class="ft">
+    <div class="wrap">
+      <div class="grid g4">
+        <div>
+          <h3>Estatery</h3>
+          <p>Find, compare and visit homes with confidence across Tamil Nadu.</p>
+        </div>
+        <div>
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="properties.html">Properties</a></li>
+            <li><a href="#agents">Agents</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#coming-soon">Coming soon</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-mail"/></svg> hello@estatery.example</li>
+            <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-phone"/></svg> +91 98765 43210</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bt">&copy; 2026 Estatery. All rights reserved.</div>
+    </div>
+  </footer>
+<script src="assets/js/hub.js" defer></script>
+</body>
+</html>

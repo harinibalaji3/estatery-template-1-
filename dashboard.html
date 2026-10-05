@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"light"}catch(e){}</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>User Dashboard | Estatery</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+
+    :root {
+      --dash-bg: #f7f7f4;
+      --dash-card: #ffffff;
+      --dash-text: #20201e;
+      --dash-muted: #777770;
+      --dash-border: rgba(0,0,0,.08);
+      --dash-accent: #8b7657;
+      --dash-accent-light: #f1eadf;
+      --dash-success: #3d8b62;
+      --dash-warning: #c58a35;
+      --dash-danger: #bd5757;
+    }
+
+    [data-theme="dark"] {
+      --dash-bg: #171715;
+      --dash-card: #222220;
+      --dash-text: #f5f5ef;
+      --dash-muted: #aaa9a1;
+      --dash-border: rgba(255,255,255,.1);
+      --dash-accent-light: #332e27;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      background: var(--dash-bg);
+      color: var(--dash-text);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select {
+      font-family: inherit;
+    }
+
+    .dashboard {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* SIDEBAR */
+
+    .dash-sidebar {
+      width: 250px;
+      min-height: 100vh;
+      background: var(--dash-card);
+      border-right: 1px solid var(--dash-border);
+      padding: 28px 18px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 20;
+    }
+
+    .dash-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "DM Serif Display", serif;
+      font-size: 27px;
+      text-decoration: none;
+      padding: 0 12px 30px;
+    }
+
+    .dash-logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--dash-accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+    }
+
+    .side-title {
+      padding: 0 12px;
+      margin: 10px 0;
+      color: var(--dash-muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+    }
+
+    .side-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .side-menu button,
+    .side-menu a {
+      border: 0;
+      background: transparent;
+      color: var(--dash-muted);
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .side-menu button:hover,
+    .side-menu a:hover,
+    .side-menu .active {
+      background: var(--dash-accent-light);
+      color: var(--dash-text);
+    }
+
+    .side-icon {
+      width: 20px;
+      text-align: center;
+      font-size: 17px;
+    }
+
+    .sidebar-bottom {
+      position: absolute;
+      bottom: 25px;
+      left: 18px;
+      right: 18px;
+    }
+
+    .back-home {
+      display: block;
+      text-align: center;
+      padding: 11px;
+      border: 1px solid var(--dash-border);
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* MAIN */
+
+    .dash-main {
+      margin-left: 250px;
+      width: calc(100% - 250px);
+      padding: 30px;
+    }
+
+    .dash-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .dash-top h1 {
+      margin: 0;
+      font-family: "DM Serif Display", serif;
+      font-size: 35px;
+    }
+
+    .dash-top p {
+      margin: 5px 0 0;
+      color: var(--dash-muted);
+      font-size: 14px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--dash-border);
+      background: var(--dash-card);
+      color: var(--dash-text);
+      cursor: pointer;
+    }
+
+    .user-mini {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--dash-card);
+      border: 1px solid var(--dash-border);
+      padding: 7px 12px 7px 7px;
+      border-radius: 30px;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--dash-accent-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 800;
+    }
+
+    .user-mini span {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* SEARCH */
+
+    .search-box {
+      background: var(--dash-card);
+      border: 1px solid var(--dash-border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 25px;
+    }
+
+    .search-box h3 {
+      margin: 0 0 16px;
+      font-size: 17px;
+    }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr auto;
+      gap: 12px;
+    }
+
+    .search-field {
+      position: relative;
+    }
+
+    .search-field label {
+      display: block;
+      font-size: 11px;
+      color: var(--dash-muted);
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .search-field input,
+    .search-field select {
+      width: 100%;
+      height: 44px;
+      border: 1px solid var(--dash-border);
+      background: var(--dash-bg);
+      color: var(--dash-text);
+      border-radius: 9px;
+      padding: 0 12px;
+      outline: none;
+    }
+
+    .search-button {
+      align-self: end;
+      height: 44px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--dash-accent);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* STATS */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--dash-card);
+      border: 1px solid var(--dash-border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat-card p {
+      margin: 0 0 7px;
+      color: var(--dash-muted);
+      font-size: 13px;
+    }
+
+    .stat-card h2 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    .stat-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--dash-accent-light);
+      font-size: 19px;
+    }
+
+    /* SECTION */
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 35px 0 15px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-family: "DM Serif Display", serif;
+      font-size: 25px;
+    }
+
+    .section-title a {
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--dash-accent);
+    }
+
+    /* PROPERTY CARDS */
+
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .property-card {
+      background: var(--dash-card);
+      border: 1px solid var(--dash-border);
+      border-radius: 17px;
+      overflow: hidden;
+    }
+
+    .property-image {
+      height: 190px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .property-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+
+    .property-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .property-tag {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      background: white;
+      color: #222;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .favorite-btn {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      width: 35px;
+      height: 35px;
+      border: 0;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+      font-size: 17px;
+    }
+
+    .property-content {
+      padding: 17px;
+    }
+
+    .property-content h3 {
+      margin: 0 0 5px;
+      font-size: 17px;
+    }
+
+    .property-location {
+      color: var(--dash-muted);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .property-price {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .property-meta {
+      display: flex;
+      gap: 15px;
+      color: var(--dash-muted);
+      font-size: 11px;
+      border-top: 1px solid var(--dash-border);
+      padding-top: 12px;
+    }
+
+    /* LOWER GRID */
+
+    .lower-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .panel {
+      background: var(--dash-card);
+      border: 1px solid var(--dash-border);
+      border-radius: 17px;
+      padding: 22px;
+    }
+
+    .panel h3 {
+      margin: 0 0 18px;
+      font-size: 17px;
+    }
+
+    /* ENQUIRIES */
+
+    .enquiry {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--dash-border);
+    }
+
+    .enquiry:last-child {
+      border-bottom: 0;
+    }
+
+    .enquiry strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .enquiry small {
+      color: var(--dash-muted);
+      font-size: 11px;
+    }
+
+    .status {
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .status.pending {
+      background: #fff2d8;
+      color: #a16a14;
+    }
+
+    .status.replied {
+      background: #e0f4e8;
+      color: #28754c;
+    }
+
+    .status.scheduled {
+      background: #e6e5f7;
+      color: #55508e;
+    }
+
+    /* VISITS */
+
+    .visit {
+      display: flex;
+      gap: 13px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--dash-border);
+    }
+
+    .visit:last-child {
+      border-bottom: 0;
+    }
+
+    .date-box {
+      min-width: 45px;
+      height: 50px;
+      border-radius: 10px;
+      background: var(--dash-accent-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .date-box strong {
+      font-size: 16px;
+    }
+
+    .date-box span {
+      font-size: 9px;
+      color: var(--dash-muted);
+    }
+
+    .visit strong {
+      font-size: 13px;
+    }
+
+    .visit p {
+      margin: 3px 0 0;
+      color: var(--dash-muted);
+      font-size: 11px;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:1100px) {
+
+      .search-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .search-button {
+        width: 100%;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .property-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+    @media(max-width:800px) {
+
+      .dash-sidebar {
+        width: 70px;
+        padding: 20px 8px;
+      }
+
+      .dash-logo {
+        justify-content: center;
+        padding: 0 0 25px;
+        font-size: 0;
+      }
+
+      .dash-logo-icon {
+        font-size: 18px;
+      }
+
+      .side-title,
+      .side-menu span,
+      .back-home {
+        display: none;
+      }
+
+      .side-menu button,
+      .side-menu a {
+        justify-content: center;
+      }
+
+      .dash-main {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+        padding: 20px;
+      }
+
+      .lower-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media(max-width:600px) {
+
+      .dash-top {
+        align-items: flex-start;
+      }
+
+      .dash-top h1 {
+        font-size: 27px;
+      }
+
+      .user-mini span {
+        display: none;
+      }
+
+      .search-grid,
+      .stats-grid,
+      .property-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dash-main {
+        padding: 15px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body data-dash="user">
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+
+  <aside class="dash-sidebar">
+
+     <a class="logo" href="index.html">
+      <img src="assets/logo.png" alt="Brand Logo" width="38" height="38">
+<span class="logo-text">Estatery</span>    </a>
+
+
+    <div class="side-title">
+      MY ACCOUNT
+    </div>
+
+    <div class="side-menu">
+
+      <button class="active">
+        <span class="side-icon">▦</span>
+        <span>Dashboard</span>
+      </button>
+
+      <button>
+        <span class="side-icon">⌕</span>
+        <span>Find Properties</span>
+      </button>
+
+      <button>
+        <span class="side-icon">♡</span>
+        <span>Saved Properties</span>
+      </button>
+
+      <button>
+        <span class="side-icon">⇄</span>
+        <span>Compare</span>
+      </button>
+
+      <button>
+        <span class="side-icon">✉</span>
+        <span>My Enquiries</span>
+      </button>
+
+      <button>
+        <span class="side-icon">▣</span>
+        <span>Site Visits</span>
+      </button>
+
+      <button>
+        <span class="side-icon">◷</span>
+        <span>Visited Properties</span>
+      </button>
+
+    </div>
+
+    <div class="side-title">
+      ACCOUNT
+    </div>
+
+    <div class="side-menu">
+
+      <button>
+        <span class="side-icon">⚙</span>
+        <span>Settings</span>
+      </button>
+
+      <a href="login.html">
+        <span class="side-icon">↪</span>
+        <span>Logout</span>
+      </a>
+
+    </div>
+
+    
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="dash-main">
+
+    <header class="dash-top">
+
+      <div>
+
+        <h1>
+          Welcome back, Harini
+        </h1>
+
+        <p>
+          Find your next property and manage your activity.
+        </p>
+
+      </div>
+
+      <div class="top-actions">
+
+        <button
+          class="icon-btn"
+          onclick="toggleTheme()"
+          title="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <div class="user-mini">
+
+          <div class="avatar">
+            H
+          </div>
+
+          <span>
+            Harini
+          </span>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- SEARCH -->
+
+    <section class="search-box">
+
+      <h3>
+        Find your perfect property
+      </h3>
+
+      <div class="search-grid">
+
+        <div class="search-field">
+
+          <label>
+            LOCATION
+          </label>
+
+          <input
+            type="text"
+            placeholder="Chennai, Coimbatore..."
+          >
+
+        </div>
+
+        <div class="search-field">
+
+          <label>
+            BUDGET
+          </label>
+
+          <select>
+
+            <option>
+              Any Budget
+            </option>
+
+            <option>
+              Under ₹50 Lakhs
+            </option>
+
+            <option>
+              ₹50L - ₹1 Cr
+            </option>
+
+            <option>
+              ₹1 Cr - ₹2 Cr
+            </option>
+
+            <option>
+              Above ₹2 Cr
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="search-field">
+
+          <label>
+            PROPERTY TYPE
+          </label>
+
+          <select>
+
+            <option>
+              Any Type
+            </option>
+
+            <option>
+              Apartment
+            </option>
+
+            <option>
+              Villa
+            </option>
+
+            <option>
+              House
+            </option>
+
+            <option>
+              Plot
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="search-field">
+
+          <label>
+            AMENITY
+          </label>
+
+          <select>
+
+            <option>
+              Any Amenity
+            </option>
+
+            <option>
+              Swimming Pool
+            </option>
+
+            <option>
+              Parking
+            </option>
+
+            <option>
+              Gym
+            </option>
+
+            <option>
+              Security
+            </option>
+
+          </select>
+
+        </div>
+
+        <button class="search-button">
+          Search
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="stats-grid">
+
+      <div class="stat-card">
+
+        <div>
+          <p>Saved Properties</p>
+          <h2>12</h2>
+        </div>
+
+        <div class="stat-icon">
+          ♡
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div>
+          <p>Compared</p>
+          <h2>4</h2>
+        </div>
+
+        <div class="stat-icon">
+          ⇄
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div>
+          <p>Enquiries</p>
+          <h2>6</h2>
+        </div>
+
+        <div class="stat-icon">
+          ✉
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div>
+          <p>Site Visits</p>
+          <h2>3</h2>
+        </div>
+
+        <div class="stat-icon">
+          ▣
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FEATURED -->
+
+    <div class="section-title">
+
+      <h2>
+        Recommended Properties
+      </h2>
+
+      <a href="properties.html">
+        View all →
+      </a>
+
+    </div>
+
+
+    <section class="property-grid">
+
+
+      <article class="property-card">
+
+        <div class="property-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
+            alt="Luxury villa"
+          >
+
+          <span class="property-tag">
+            FOR SALE
+          </span>
+
+          <button class="favorite-btn">
+            ♡
+          </button>
+
+        </div>
+
+        <div class="property-content">
+
+          <h3>
+            Modern Garden Villa
+          </h3>
+
+          <div class="property-location">
+            ECR, Chennai
+          </div>
+
+          <div class="property-price">
+            ₹1.85 Cr
+          </div>
+
+          <div class="property-meta">
+            <span>4 Beds</span>
+            <span>3 Baths</span>
+            <span>2,450 sqft</span>
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="property-card">
+
+        <div class="property-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80"
+            alt="Modern apartment"
+          >
+
+          <span class="property-tag">
+            FOR SALE
+          </span>
+
+          <button class="favorite-btn">
+            ♡
+          </button>
+
+        </div>
+
+        <div class="property-content">
+
+          <h3>
+            Premium City Apartment
+          </h3>
+
+          <div class="property-location">
+            Anna Nagar, Chennai
+          </div>
+
+          <div class="property-price">
+            ₹92 Lakhs
+          </div>
+
+          <div class="property-meta">
+            <span>3 Beds</span>
+            <span>2 Baths</span>
+            <span>1,680 sqft</span>
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="property-card">
+
+        <div class="property-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=80"
+            alt="Luxury home"
+          >
+
+          <span class="property-tag">
+            FOR RENT
+          </span>
+
+          <button class="favorite-btn">
+            ♡
+          </button>
+
+        </div>
+
+        <div class="property-content">
+
+          <h3>
+            Luxury Family Home
+          </h3>
+
+          <div class="property-location">
+            Saravanampatti, Coimbatore
+          </div>
+
+          <div class="property-price">
+            ₹38,000 / month
+          </div>
+
+          <div class="property-meta">
+            <span>3 Beds</span>
+            <span>3 Baths</span>
+            <span>2,100 sqft</span>
+          </div>
+
+        </div>
+
+      </article>
+
+
+    </section>
+
+
+    <!-- LOWER SECTION -->
+
+    <section class="lower-grid">
+
+
+      <!-- ENQUIRIES -->
+
+      <div class="panel">
+
+        <h3>
+          Recent Enquiries
+        </h3>
+
+        <div class="enquiry">
+
+          <div>
+
+            <strong>
+              Modern Garden Villa
+            </strong>
+
+            <small>
+              Enquiry submitted · Sep 28
+            </small>
+
+          </div>
+
+          <span class="status replied">
+            Replied
+          </span>
+
+        </div>
+
+        <div class="enquiry">
+
+          <div>
+
+            <strong>
+              Premium City Apartment
+            </strong>
+
+            <small>
+              Enquiry submitted · Sep 25
+            </small>
+
+          </div>
+
+          <span class="status pending">
+            Pending
+          </span>
+
+        </div>
+
+        <div class="enquiry">
+
+          <div>
+
+            <strong>
+              Luxury Family Home
+            </strong>
+
+            <small>
+              Enquiry submitted · Sep 21
+            </small>
+
+          </div>
+
+          <span class="status scheduled">
+            Scheduled
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- SITE VISITS -->
+
+      <div class="panel">
+
+        <h3>
+          Upcoming Site Visits
+        </h3>
+
+        <div class="visit">
+
+          <div class="date-box">
+            <strong>05</strong>
+            <span>OCT</span>
+          </div>
+
+          <div>
+
+            <strong>
+              Modern Garden Villa
+            </strong>
+
+            <p>
+              10:30 AM · ECR, Chennai
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="visit">
+
+          <div class="date-box">
+            <strong>12</strong>
+            <span>OCT</span>
+          </div>
+
+          <div>
+
+            <strong>
+              Premium City Apartment
+            </strong>
+
+            <p>
+              3:00 PM · Anna Nagar
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- VISITED -->
+
+    <div class="section-title">
+
+      <h2>
+        Recently Visited
+      </h2>
+
+      <a href="#">
+        View history →
+      </a>
+
+    </div>
+
+
+    <section class="property-grid">
+
+      <article class="property-card">
+
+        <div class="property-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80"
+            alt="Property"
+          >
+
+        </div>
+
+        <div class="property-content">
+
+          <h3>
+            Contemporary Villa
+          </h3>
+
+          <div class="property-location">
+            OMR, Chennai
+          </div>
+
+          <div class="property-price">
+            ₹1.25 Cr
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="property-card">
+
+        <div class="property-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80"
+            alt="Property"
+          >
+
+        </div>
+
+        <div class="property-content">
+
+          <h3>
+            Green View Residence
+          </h3>
+
+          <div class="property-location">
+            Madurai
+          </div>
+
+          <div class="property-price">
+            ₹78 Lakhs
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="property-card">
+
+        <div class="property-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=900&q=80"
+            alt="Property"
+          >
+
+        </div>
+
+        <div class="property-content">
+
+          <h3>
+            Urban Luxury Apartment
+          </h3>
+
+          <div class="property-location">
+            Velachery, Chennai
+          </div>
+
+          <div class="property-price">
+            ₹1.05 Cr
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<script>
+
+function toggleTheme() {
+
+  const current =
+    document.documentElement.getAttribute("data-theme");
+
+  document.documentElement.setAttribute(
+    "data-theme",
+    current === "dark" ? "light" : "dark"
+  );
+
+}
+
+</script>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/dashboard.js"></script>
+</body>
+</html>

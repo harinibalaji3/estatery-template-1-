@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Blog Details | Estatery</title>
+
+  <meta
+    name="description"
+    content="Read detailed real estate articles and property guides from Estatery.">
+
+  <link
+    rel="stylesheet"
+    href="assets/css/style.css">
+
+  <link rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+  <link rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+
+  <!-- =========================================
+       PAGE-SPECIFIC CSS
+  ========================================== -->
+  <style>
+
+    .blog-detail-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .article-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .blog-cover {
+      margin: 0;
+    }
+
+    .blog-cover img {
+      width: 100%;
+      height:auto;aspect-ratio:16/9;max-height:460px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .blog-cover figcaption {
+      padding: 15px 25px;
+      font-size: .9rem;
+      line-height: 1.7;
+      opacity: .7;
+    }
+
+    .article-body {
+      padding: 15px 35px 35px;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .article-body h2 {
+      margin-top: 35px;
+      margin-bottom: 12px;
+    }
+
+    .article-body h3 {
+      margin-top: 25px;
+    }
+
+    .article-body p {
+      margin-bottom: 18px;
+    }
+
+    .article-body ul {
+      padding-left: 25px;
+      line-height: 2;
+    }
+
+    .article-body li {
+      margin-bottom: 5px;
+    }
+
+    .article-highlight {
+      padding: 22px;
+      margin: 30px 0;
+      border-left: 4px solid currentColor;
+      border-radius: 12px;
+      background: rgba(128,128,128,.08);
+    }
+
+    .article-highlight p {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .author-box {
+      margin: 10px 35px 35px;
+      padding: 25px;
+
+      display: flex;
+      gap: 18px;
+      align-items: center;
+
+      border: 1px solid rgba(128,128,128,.2);
+      border-radius: 16px;
+    }
+
+    .author-box img {
+      width: 82px;
+      height: 82px;
+
+      border-radius: 50%;
+      object-fit: cover;
+
+      flex-shrink: 0;
+    }
+
+    .author-box h3 {
+      margin: 5px 0;
+    }
+
+    .author-box p {
+      margin: 5px 0 0;
+      line-height: 1.7;
+      opacity: .75;
+    }
+
+    .sidebar-card {
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-card h3 {
+      margin-top: 0;
+    }
+
+    .category-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .category-list a {
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(128,128,128,.15);
+    }
+
+    .recent-post {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 12px;
+      margin-top: 18px;
+      text-decoration: none;
+    }
+
+    .recent-post img {
+      width: 82px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .recent-post h4 {
+      margin: 0 0 6px;
+      font-size: .9rem;
+      line-height: 1.4;
+    }
+
+    .recent-post small {
+      opacity: .6;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .related-card {
+      overflow: hidden;
+    }
+
+    .related-card > img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .related-content {
+      padding: 20px;
+    }
+
+    .related-content h3 {
+      margin: 12px 0 8px;
+      line-height: 1.4;
+    }
+
+    .related-content p {
+      line-height: 1.7;
+      opacity: .78;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 15px;
+      opacity: .8;
+    }
+
+    .article-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .back-blog {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+
+      .blog-detail-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .related-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .blog-cover img {
+        height: 300px;
+      }
+
+      .article-body {
+        padding: 15px 20px 25px;
+      }
+
+      .author-box {
+        margin: 10px 20px 25px;
+        align-items: flex-start;
+      }
+
+      .related-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .article-meta {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       SVG ICONS
+  ========================================== -->
+  <svg style="display:none">
+
+    <symbol id="i-sun" viewBox="0 0 24 24">
+
+      <circle cx="12" cy="12" r="4"></circle>
+
+      <path d="
+        M12 2v2
+        M12 20v2
+        M4.93 4.93l1.41 1.41
+        M17.66 17.66l1.41 1.41
+        M2 12h2
+        M20 12h2
+        M4.93 19.07l1.41-1.41
+        M17.66 6.34l1.41-1.41">
+      </path>
+
+    </symbol>
+
+
+    <symbol id="i-moon" viewBox="0 0 24 24">
+
+      <path
+        d="M21 12.8A8.5 8.5 0 1111.2 3
+        6.7 6.7 0 0021 12.8z">
+      </path>
+
+    </symbol>
+
+
+    <symbol id="i-user" viewBox="0 0 24 24">
+
+      <circle
+        cx="12"
+        cy="8"
+        r="4">
+      </circle>
+
+      <path
+        d="M4 21a8 8 0 0116 0">
+      </path>
+
+    </symbol>
+
+
+    <symbol id="i-menu" viewBox="0 0 24 24">
+
+      <path
+        d="M4 6h16M4 12h16M4 18h16">
+      </path>
+
+    </symbol>
+
+  </svg>
+
+
+  <header class="nav">
+  <div class="wrap">
+
+    <!-- LOGO -->
+    <a class="logo" href="index.html">
+      <img src="assets/logo.png" alt="Brand Logo" width="38" height="38">
+<span class="logo-text">Estatery</span>    </a>
+
+    <!-- NAVIGATION -->
+    <ul class="links" id="links">
+
+      <li>
+        <a class="l " href="index.html">Home</a>
+      </li>
+
+      <li>
+        <a class="l " href="home-2.html">Home 2</a>
+      </li>
+
+      <li>
+        <a class="l" href="about.html">About</a>
+      </li>
+
+      <li>
+        <a class="l" href="properties.html">Properties</a>
+      </li>
+
+      <li>
+        <a class="l act" href="blog.html">Blog</a>
+      </li>
+
+      <li>
+        <a class="l" href="contact.html">Contact</a>
+      </li>
+
+    </ul>
+
+    <!-- ACTIONS -->
+    <div class="acts">
+
+      <!-- DARK / LIGHT MODE -->
+      <button
+        class="ib"
+        data-act="theme"
+        aria-label="Toggle Dark/Light Mode"
+        title="Toggle Theme"
+      >
+        <svg
+          class="ic sun"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="5"></circle>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+
+        <svg
+          class="ic moon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- RTL / LTR -->
+      <button
+        class="ib"
+        data-act="dir"
+        aria-label="Toggle RTL Direction"
+        title="RTL / LTR"
+      >
+        <b style="position:static;background:none;color:inherit;font-size:11px">
+          RTL
+        </b>
+      </button>
+
+      <!-- PROFILE -->
+      <div class="pf">
+
+        <button
+          class="ib"
+          data-act="pf"
+          aria-label="User Account Menu"
+          aria-haspopup="true"
+        >
+          <svg
+            class="ic"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+
+        <!-- PROFILE DROPDOWN -->
+        <div class="dd">
+
+          <div class="dropdown-header">
+            <h4>Estatery</h4>
+          </div>
+
+          <a href="login.html">Login</a>
+
+          <a href="login.html">Signup</a>
+
+          <a href="dashboard.html">User Dashboard</a>
+
+          <a href="admin-dashboard.html">Admin Dashboard</a>
+
+        </div>
+
+      </div>
+
+      <!-- MOBILE MENU -->
+      <button
+        class="ib burger"
+        data-act="menu"
+        aria-label="Toggle menu"
+      >
+        <svg
+          class="ic"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+
+
+  <!-- =========================================
+       BLOG HERO
+  ========================================== -->
+  <section class="page-hero" style="--hero-img:url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1800&q=80')"><div class="hero-overlay"></div>
+
+    
+
+
+    <div class="wrap hero-in">
+
+      <span
+        class="badge"
+        id="blogCategory">
+        Tips
+      </span>
+
+
+      <h1 id="blogTitle">
+        Five Questions to Ask During Every Property Site Visit
+      </h1>
+
+
+      <div
+        class="article-meta"
+        id="blogMeta">
+
+        <span>
+          By Ananya Krishnan
+        </span>
+
+        <span>
+          September 28, 2026
+        </span>
+
+        <span>
+          6 min read
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       MAIN CONTENT
+  ========================================== -->
+  <section class="sec">
+
+    <div class="wrap">
+
+
+      <a
+        href="blog.html"
+        class="back-blog">
+        ← Back to Blog
+      </a>
+
+
+      <div class="blog-detail-layout">
+
+
+        <!-- =====================================
+             ARTICLE
+        ====================================== -->
+        <article class="card article-card">
+
+
+          <!-- COVER IMAGE -->
+          <figure class="blog-cover">
+
+            <img
+              id="blogImage"
+              src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=80"
+              alt="Modern apartment living room with natural light">
+
+            <figcaption id="imageDescription">
+
+              A modern apartment living space showing the layout,
+              natural lighting and interior condition that buyers
+              should observe during a property site visit.
+
+            </figcaption>
+
+          </figure>
+
+
+
+          <!-- ARTICLE BODY -->
+          <div
+            class="article-body"
+            id="articleBody">
+
+
+            <p id="blogIntro">
+
+              Photos and floor plans can help you shortlist a property,
+              but a site visit gives you the opportunity to understand
+              what living in the property will actually feel like.
+
+            </p>
+
+
+            <div class="article-highlight">
+
+              <p>
+                Don't leave a site visit with only photographs.
+                Leave with answers to the questions that matter
+                for everyday living.
+              </p>
+
+            </div>
+
+
+            <h2>
+              1. What will I actually pay every month?
+            </h2>
+
+            <p>
+
+              Don't focus only on the purchase price or monthly rent.
+              Ask about maintenance charges, parking fees, utility
+              costs, association charges and other recurring expenses.
+
+            </p>
+
+            <p>
+
+              Understanding these costs before making a decision
+              helps you create a more realistic monthly budget.
+
+            </p>
+
+
+            <h2>
+              2. How reliable are the water and power supplies?
+            </h2>
+
+            <p>
+
+              Check the water pressure, power backup and common
+              facilities during your visit. Ask the property manager
+              or residents whether interruptions are common.
+
+            </p>
+
+
+            <h2>
+              3. What parking space is actually included?
+            </h2>
+
+            <p>
+
+              Parking can become an important everyday issue.
+              Confirm whether the property includes a dedicated
+              parking space and where it is located.
+
+            </p>
+
+
+            <h2>
+              4. Which documents and approvals are available?
+            </h2>
+
+            <p>
+
+              Ask the seller or property representative about
+              the relevant property documents and approvals.
+
+              If you are seriously considering the property,
+              have the documents reviewed by an appropriate
+              professional.
+
+            </p>
+
+
+            <h2>
+              5. What is the neighborhood like?
+            </h2>
+
+            <p>
+
+              A property can feel very different at different
+              times of the day. Consider visiting again during
+              another time to understand traffic, noise, lighting
+              and nearby activity.
+
+            </p>
+
+
+            <h2>
+              Site Visit Checklist
+            </h2>
+
+            <p>
+              Before leaving the property, check these simple items:
+            </p>
+
+            <ul>
+
+              <li>
+                Check walls, ceilings and windows.
+              </li>
+
+              <li>
+                Test water taps and basic electrical points.
+              </li>
+
+              <li>
+                Ask about maintenance charges.
+              </li>
+
+              <li>
+                Confirm parking arrangements.
+              </li>
+
+              <li>
+                Check nearby roads and public transport.
+              </li>
+
+              <li>
+                Take photos and notes for later comparison.
+              </li>
+
+            </ul>
+
+
+            <h2>
+              Final Thoughts
+            </h2>
+
+            <p>
+
+              A good site visit is more than simply looking
+              at the rooms. It is an opportunity to understand
+              the property, building, neighborhood and ongoing
+              costs before making a decision.
+
+            </p>
+
+          </div>
+
+
+
+          <!-- =====================================
+               AUTHOR
+          ====================================== -->
+          <div class="author-box">
+
+            <img
+              id="authorImage"
+              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80"
+              alt="Ananya Krishnan, real estate writer">
+
+            <div>
+
+              <span>
+                Written by
+              </span>
+
+              <h3 id="authorName">
+                Ananya Krishnan
+              </h3>
+
+              <p id="authorBio">
+
+                Ananya writes practical real-estate guides
+                covering property research, site visits and
+                home-buying tips.
+
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- =====================================
+             SIDEBAR
+        ====================================== -->
+        <aside>
+
+
+          <!-- CATEGORIES -->
+          <div class="card sidebar-card">
+
+            <h3>
+              Categories
+            </h3>
+
+
+            <div class="category-list">
+
+              <a href="blog.html">
+                Buying Guide
+              </a>
+
+              <a href="blog.html">
+                Property Tips
+              </a>
+
+              <a href="blog.html">
+                Finance
+              </a>
+
+              <a href="blog.html">
+                Legal
+              </a>
+
+              <a href="blog.html">
+                Lifestyle
+              </a>
+
+              <a href="blog.html">
+                Market
+              </a>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- RECENT POSTS -->
+          <div class="card sidebar-card">
+
+            <h3>
+              Recent Posts
+            </h3>
+
+
+            <a
+              href="blog-details.html?id=apartment-villa"
+              class="recent-post">
+
+              <img
+                src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=400&q=80"
+                alt="Modern villa exterior with garden">
+
+              <div>
+
+                <h4>
+                  Choosing Between an Apartment and Villa
+                </h4>
+
+                <small>
+                  Sep 24, 2026
+                </small>
+
+              </div>
+
+            </a>
+
+
+            <a
+              href="blog-details.html?id=property-tax"
+              class="recent-post">
+
+              <img
+                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=400&q=80"
+                alt="Property documents arranged on a desk">
+
+              <div>
+
+                <h4>
+                  How to Read a Property Tax Receipt
+                </h4>
+
+                <small>
+                  Sep 20, 2026
+                </small>
+
+              </div>
+
+            </a>
+
+
+            <a
+              href="blog-details.html?id=home-loan"
+              class="recent-post">
+
+              <img
+                src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=400&q=80"
+                alt="Financial planning documents and calculator">
+
+              <div>
+
+                <h4>
+                  Home Loan Basics for First-Time Buyers
+                </h4>
+
+                <small>
+                  Sep 15, 2026
+                </small>
+
+              </div>
+
+            </a>
+
+          </div>
+
+
+
+          <!-- SIDEBAR CTA -->
+          <div class="card sidebar-card">
+
+            <span class="eyebrow">
+              ESTATERY
+            </span>
+
+            <h3>
+              Looking for a property?
+            </h3>
+
+            <p>
+              Explore available homes and properties
+              on Estatery.
+            </p>
+
+            <a
+              href="properties.html"
+              class="btn sm">
+
+              Browse Properties
+
+            </a>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       RELATED POSTS
+  ========================================== -->
+  <section class="sec">
+
+    <div class="wrap">
+
+
+      <div class="head">
+
+        <div>
+
+          <span class="eyebrow">
+            KEEP READING
+          </span>
+
+          <h2>
+            Related Articles
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="related-grid"
+        id="relatedPosts">
+
+
+        <!-- RELATED POST 1 -->
+        <article class="card related-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80"
+            alt="Modern villa exterior surrounded by greenery">
+
+          <div class="related-content">
+
+            <span class="badge">
+              Buying Guide
+            </span>
+
+            <h3>
+              Choosing Between an Apartment and Villa
+            </h3>
+
+            <p>
+              Compare space, privacy, maintenance and shared
+              amenities before choosing your next home.
+            </p>
+
+            <a
+              href="blog-details.html?id=apartment-villa"
+              class="btn sm">
+
+              View Details
+
+            </a>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- RELATED POST 2 -->
+        <article class="card related-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80"
+            alt="Property documents arranged on a desk">
+
+          <div class="related-content">
+
+            <span class="badge">
+              Legal
+            </span>
+
+            <h3>
+              How to Read a Property Tax Receipt
+            </h3>
+
+            <p>
+              Understand the important information you should
+              check when reviewing property tax documents.
+            </p>
+
+            <a
+              href="blog-details.html?id=property-tax"
+              class="btn sm">
+
+              View Details
+
+            </a>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- RELATED POST 3 -->
+        <article class="card related-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80"
+            alt="Modern city buildings representing real estate locations">
+
+          <div class="related-content">
+
+            <span class="badge">
+              Market
+            </span>
+
+            <h3>
+              Understanding Rental Yields
+            </h3>
+
+            <p>
+              Learn which location and property factors can
+              affect rental income when comparing properties.
+            </p>
+
+            <a
+              href="blog-details.html?id=rental-yield"
+              class="btn sm">
+
+              View Details
+
+            </a>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+  <footer class="ft">
+
+    <div class="wrap">
+
+      <div class="grid g4">
+
+
+        <div>
+
+          <a
+            class="logo"
+            href="index.html">
+
+            <img
+              src="assets/logo.png"
+              alt="Estatery logo"
+              width="38"
+              height="38">
+
+            <span class="logo-text">
+              Estatery
+            </span>
+
+          </a>
+
+          <p>
+            Making property discovery simpler,
+            clearer and more enjoyable.
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <h4>
+            Explore
+          </h4>
+
+          <a href="properties.html">
+            Properties
+          </a>
+
+          <a href="blog.html">
+            Blog
+          </a>
+
+          <a href="agents.html">
+            Agents
+          </a>
+
+          <a href="locations.html">
+            Locations
+          </a>
+
+        </div>
+
+
+        <div>
+
+          <h4>
+            Company
+          </h4>
+
+          <a href="about.html">
+            About Us
+          </a>
+
+          <a href="services.html">
+            Services
+          </a>
+
+          <a href="contact.html">
+            Contact
+          </a>
+
+        </div>
+
+
+        <div>
+
+          <h4>
+            Contact
+          </h4>
+
+          <p>
+            hello@estatery.com
+          </p>
+
+          <p>
+            +91 98765 43210
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="bt">
+
+        <span>
+          © 2026 Estatery. All rights reserved.
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- =========================================
+       BLOG DATA + DYNAMIC DETAILS
+  ========================================== -->
+  <script>
+
+    const blogs = {
+
+      "site-visit": {
+
+        category: "Tips",
+
+        title:
+          "Five Questions to Ask During Every Property Site Visit",
+
+        image:
+          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=80",
+
+        imageAlt:
+          "Modern apartment living room with natural light",
+
+        imageDescription:
+          "A modern apartment living space showing the layout, natural lighting and interior condition that buyers should observe during a property site visit.",
+
+        author:
+          "Ananya Krishnan",
+
+        date:
+          "September 28, 2026",
+
+        read:
+          "6 min read",
+
+        authorImage:
+          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80",
+
+        authorBio:
+          "Ananya writes practical real-estate guides covering property research, site visits and home-buying tips."
+
+      },
+
+
+      "apartment-villa": {
+
+        category: "Buying Guide",
+
+        title:
+          "Choosing Between an Apartment and Villa",
+
+        image:
+          "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1600&q=80",
+
+        imageAlt:
+          "Modern villa exterior with garden and outdoor space",
+
+        imageDescription:
+          "A contemporary villa surrounded by greenery, showing the private outdoor space and larger layout that are commonly associated with villa living.",
+
+        author:
+          "Rahul Menon",
+
+        date:
+          "September 24, 2026",
+
+        read:
+          "5 min read",
+
+        authorImage:
+          "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+
+        authorBio:
+          "Rahul writes about practical property choices, home layouts and factors that buyers should consider before purchasing."
+
+      },
+
+
+      "property-tax": {
+
+        category: "Legal",
+
+        title:
+          "How to Read a Property Tax Receipt",
+
+        image:
+          "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80",
+
+        imageAlt:
+          "Property documents and paperwork arranged on a desk",
+
+        imageDescription:
+          "Property documents arranged on a workspace, representing the paperwork buyers may need to review when researching a property.",
+
+        author:
+          "Priya Sharma",
+
+        date:
+          "September 20, 2026",
+
+        read:
+          "4 min read",
+
+        authorImage:
+          "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=300&q=80",
+
+        authorBio:
+          "Priya creates easy-to-understand guides about property documents, paperwork and the practical side of real estate."
+
+      },
+
+
+      "home-loan": {
+
+        category: "Finance",
+
+        title:
+          "Home Loan Basics for First-Time Buyers",
+
+        image:
+          "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80",
+
+        imageAlt:
+          "Financial planning documents and calculator on a desk",
+
+        imageDescription:
+          "Financial documents and a calculator representing the budgeting and planning involved when preparing for a home loan.",
+
+        author:
+          "Meera Joseph",
+
+        date:
+          "September 15, 2026",
+
+        read:
+          "6 min read",
+
+        authorImage:
+          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80",
+
+        authorBio:
+          "Meera focuses on making basic property finance concepts easier for first-time buyers to understand."
+
+      },
+
+
+      "rental-yield": {
+
+        category: "Market",
+
+        title:
+          "Understanding Rental Yields",
+
+        image:
+          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
+
+        imageAlt:
+          "Modern city buildings representing real estate locations",
+
+        imageDescription:
+          "Modern buildings in an urban location, illustrating how property type, location and demand can be considered when studying rental opportunities.",
+
+        author:
+          "Arjun Kumar",
+
+        date:
+          "September 11, 2026",
+
+        read:
+          "5 min read",
+
+        authorImage:
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+
+        authorBio:
+          "Arjun writes about property markets, rental considerations and the factors that can influence real estate decisions."
+
+      },
+
+
+      "new-home": {
+
+        category: "Lifestyle",
+
+        title:
+          "Simple Ways to Make a New Home Feel Comfortable",
+
+        image:
+          "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80",
+
+        imageAlt:
+          "Bright contemporary home interior with comfortable furniture",
+
+        imageDescription:
+          "A bright contemporary home interior showing how furniture placement, lighting and simple design choices can create a comfortable living environment.",
+
+        author:
+          "Kavya Nair",
+
+        date:
+          "September 7, 2026",
+
+        read:
+          "4 min read",
+
+        authorImage:
+          "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80",
+
+        authorBio:
+          "Kavya shares practical lifestyle and home ideas for creating comfortable and functional living spaces."
+
+      }
+
+    };
+
+
+
+    /* =========================================
+       GET BLOG ID FROM URL
+    ========================================== */
+
+    const params =
+      new URLSearchParams(window.location.search);
+
+    const blogId =
+      params.get("id") || "site-visit";
+
+
+    const blog =
+      blogs[blogId] || blogs["site-visit"];
+
+
+
+    /* =========================================
+       UPDATE PAGE CONTENT
+    ========================================== */
+
+    document.title =
+      blog.title + " | Estatery";
+
+
+    document.getElementById("blogCategory").textContent =
+      blog.category;
+
+
+    document.getElementById("blogTitle").textContent =
+      blog.title;
+
+
+    document.getElementById("blogMeta").innerHTML = `
+
+      <span>
+        By ${blog.author}
+      </span>
+
+      <span>
+        ${blog.date}
+      </span>
+
+      <span>
+        ${blog.read}
+      </span>
+
+    `;
+
+
+    /* HERO IMAGE */
+
+    document.getElementById("heroImage").style.backgroundImage =
+      `url("${blog.image}")`;
+
+
+    /* ARTICLE IMAGE */
+
+    const blogImage =
+      document.getElementById("blogImage");
+
+    blogImage.src =
+      blog.image;
+
+    blogImage.alt =
+      blog.imageAlt;
+
+
+    /* IMAGE DESCRIPTION */
+
+    document.getElementById("imageDescription").textContent =
+      blog.imageDescription;
+
+
+    /* AUTHOR */
+
+    document.getElementById("authorName").textContent =
+      blog.author;
+
+
+    document.getElementById("authorImage").src =
+      blog.authorImage;
+
+
+    document.getElementById("authorImage").alt =
+      blog.author + ", Estatery real estate writer";
+
+
+    document.getElementById("authorBio").textContent =
+      blog.authorBio;
+
+  </script>
+
+
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

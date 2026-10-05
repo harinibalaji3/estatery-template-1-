@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"light"}catch(e){}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Estatery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- NOTE: style.css is intentionally NOT linked. This page is self-contained. -->
+<style>
+:root{--admin-bg:#f6f6f3;--admin-card:#fff;--admin-text:#20201e;--admin-muted:#777770;--admin-border:rgba(0,0,0,.08);--admin-accent:#8b7657;--admin-accent-light:#f1eadf;--green:#3c8b61;--green-bg:#e3f3e9;--orange:#b67a28;--orange-bg:#fff0d7;--red:#b85151;--red-bg:#fae4e4;--blue:#536e9e;--shadow:0 12px 35px rgba(0,0,0,.06);--t:.25s ease}
+[data-theme="dark"]{--admin-bg:#171715;--admin-card:#222220;--admin-text:#f5f5ef;--admin-muted:#aaa9a1;--admin-border:rgba(255,255,255,.1);--admin-accent-light:#332e27;--green-bg:#20362a;--orange-bg:#3c3020;--red-bg:#3b2525;--shadow:0 12px 35px rgba(0,0,0,.25)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--admin-bg);color:var(--admin-text);font-family:"Manrope",sans-serif;transition:background var(--t),color var(--t)}
+button,input{font-family:inherit}button{cursor:pointer}
+h1,h2{font-weight:400}
+.is-hidden{display:none!important}
+
+/* sidebar */
+.admin-sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;background:var(--admin-card);border-right:1px solid var(--admin-border);padding:28px 18px;z-index:100;overflow-y:auto}
+.admin-logo{display:flex;align-items:center;gap:10px;padding:0 12px 26px;font-family:"DM Serif Display",serif;font-size:27px}
+.admin-logo-icon{width:38px;height:38px;border-radius:12px;background:var(--admin-accent-light);display:flex;align-items:center;justify-content:center;font-size:20px}
+.admin-label{margin:12px 0 8px;padding:0 12px;color:var(--admin-muted);font-size:10px;font-weight:800;letter-spacing:1.2px}
+.admin-menu{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.admin-menu a,.admin-menu button{width:100%;border:0;background:transparent;color:var(--admin-muted);padding:12px;border-radius:10px;display:flex;align-items:center;gap:12px;text-decoration:none;font-size:13px;font-weight:600;text-align:left;transition:var(--t)}
+.admin-menu a:hover,.admin-menu button:hover,.admin-menu .active{background:var(--admin-accent-light);color:var(--admin-text);transform:translateX(3px)}
+.admin-icon{width:20px;text-align:center;font-size:16px}
+.admin-bottom{margin-top:20px}
+.website-btn{display:block;text-align:center;padding:11px;border:1px solid var(--admin-border);color:var(--admin-text);border-radius:10px;font-size:12px;text-decoration:none;font-weight:700;transition:var(--t)}
+.website-btn:hover{background:var(--admin-accent);color:#fff;border-color:var(--admin-accent)}
+
+/* main + header */
+.admin-main{margin-left:250px;padding:30px;min-width:0}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;gap:20px}
+.admin-header h1{margin:0;font-family:"DM Serif Display",serif;font-size:35px}
+.admin-header p{margin:5px 0 0;color:var(--admin-muted);font-size:13px}
+.admin-actions{display:flex;gap:10px;align-items:center}
+.round-btn{width:42px;height:42px;border:1px solid var(--admin-border);background:var(--admin-card);color:var(--admin-text);border-radius:50%;transition:var(--t)}
+.round-btn:hover{transform:rotate(20deg);background:var(--admin-accent-light)}
+.admin-profile{display:flex;align-items:center;gap:10px;background:var(--admin-card);border:1px solid var(--admin-border);padding:6px 13px 6px 6px;border-radius:30px}
+.admin-avatar{width:34px;height:34px;border-radius:50%;background:var(--admin-accent-light);display:flex;align-items:center;justify-content:center;font-weight:800}
+.admin-profile span{font-size:12px;font-weight:700}
+
+/* stats + quick actions */
+.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px}
+.admin-stat{background:var(--admin-card);border:1px solid var(--admin-border);border-radius:16px;padding:20px;position:relative;box-shadow:var(--shadow);transition:var(--t)}
+.admin-stat:hover{transform:translateY(-4px)}
+.admin-stat p{margin:0 0 8px;color:var(--admin-muted);font-size:12px}
+.admin-stat h2{margin:0;font-size:27px;font-family:"DM Serif Display",serif}
+.stat-change{margin-top:8px;font-size:10px;font-weight:700}
+.up{color:var(--green)}.warning{color:var(--orange)}
+.admin-stat-icon{position:absolute;right:18px;top:18px;width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--admin-accent-light);font-size:18px}
+.quick-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.quick-btn{border:1px solid var(--admin-border);background:var(--admin-card);color:var(--admin-text);border-radius:10px;padding:11px 15px;font-size:12px;font-weight:700;transition:var(--t)}
+.quick-btn:hover{transform:translateY(-2px);border-color:var(--admin-accent);color:var(--admin-accent)}
+.quick-btn.primary{background:var(--admin-accent);color:#fff;border-color:var(--admin-accent)}
+.quick-btn.primary:hover{color:#fff;opacity:.9}
+
+/* panels */
+.admin-panel{background:var(--admin-card);border:1px solid var(--admin-border);border-radius:17px;padding:22px;overflow:hidden;box-shadow:var(--shadow)}
+.panel-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}
+.panel-heading h2{margin:0;font-family:"DM Serif Display",serif;font-size:23px}
+.panel-heading a{color:var(--admin-accent);font-size:11px;text-decoration:none;font-weight:700}
+.panel-action{border:0;background:var(--admin-accent-light);color:var(--admin-accent);padding:8px 12px;border-radius:8px;font-size:11px;font-weight:800;transition:var(--t)}
+.panel-action:hover{background:var(--admin-accent);color:#fff}
+
+/* table */
+.table-wrapper{overflow-x:auto}
+.property-table{width:100%;border-collapse:collapse;min-width:650px}
+.property-table th{color:var(--admin-muted);font-size:10px;font-weight:800;text-align:left;padding:11px;border-bottom:1px solid var(--admin-border)}
+.property-table td{padding:13px 11px;border-bottom:1px solid var(--admin-border);font-size:12px}
+.property-table tr:last-child td{border-bottom:0}
+.property-name{display:flex;align-items:center;gap:10px}
+.property-thumb{width:43px;height:43px;border-radius:8px;object-fit:cover}
+.property-name strong{display:block;font-size:12px}
+.property-name small{color:var(--admin-muted);font-size:10px}
+.listing-status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:9px;font-weight:800}
+.active-status{background:var(--green-bg);color:var(--green)}
+.pending-status{background:var(--orange-bg);color:var(--orange)}
+.sold-status{background:var(--red-bg);color:var(--red)}
+.action-btn{border:1px solid var(--admin-border);background:transparent;color:var(--admin-text);width:30px;height:30px;border-radius:7px;transition:var(--t)}
+.action-btn:hover{background:var(--admin-accent-light)}
+
+/* enquiries, activity */
+.enquiry-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 0;border-bottom:1px solid var(--admin-border)}
+.enquiry-item:last-child{border-bottom:0}
+.enquiry-item strong{display:block;font-size:12px}
+.enquiry-item small{color:var(--admin-muted);font-size:10px}
+.enquiry-clickable{cursor:pointer;padding-left:8px;padding-right:8px;border-radius:8px;transition:.2s ease}
+.enquiry-clickable:hover{background:var(--admin-accent-light);transform:translateX(3px)}
+
+/* visits */
+.visit-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--admin-border)}
+.visit-row:last-child{border-bottom:0}
+.visit-date{width:45px;min-width:45px;height:45px;border-radius:9px;background:var(--admin-accent-light);display:flex;flex-direction:column;justify-content:center;align-items:center}
+.visit-date strong{font-size:15px}.visit-date span{font-size:8px;color:var(--admin-muted)}
+.visit-information{flex:1}
+.visit-information strong{font-size:12px}
+.visit-information p{margin:3px 0;color:var(--admin-muted);font-size:10px}
+.visit-status{font-size:9px;font-weight:700}
+.confirmed{color:var(--green)}.pending{color:var(--orange)}.reschedule{color:var(--blue)}
+.visit-action{border:1px solid var(--admin-border);background:transparent;color:var(--admin-text);padding:7px 10px;border-radius:7px;font-size:10px;font-weight:700;transition:var(--t)}
+.visit-action:hover{background:var(--admin-accent);color:#fff;border-color:var(--admin-accent)}
+
+/* agents, pricing */
+.agent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.agent-card{border:1px solid var(--admin-border);border-radius:13px;padding:15px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:var(--t)}
+.agent-card:hover{transform:translateY(-4px);border-color:var(--admin-accent);box-shadow:var(--shadow)}
+.agent-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--admin-accent-light)}
+.agent-card strong{display:block;font-size:12px}
+.agent-card small{color:var(--admin-muted);font-size:10px}
+.agent-arrow{margin-left:auto;color:var(--admin-accent);font-weight:800}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.pricing-card{padding:17px;background:var(--admin-bg);border-radius:12px;transition:var(--t)}
+.pricing-card:hover{transform:translateY(-3px)}
+.pricing-card span{display:block;color:var(--admin-muted);font-size:10px;margin-bottom:5px}
+.pricing-card strong{font-size:19px}
+
+/* modals */
+.admin-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:999;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+.admin-modal.show{opacity:1;visibility:visible}
+.modal-box,.chat-box{width:100%;max-width:650px;max-height:85vh;overflow-y:auto;background:var(--admin-card);color:var(--admin-text);border-radius:20px;padding:25px;position:relative;transform:translateY(20px) scale(.97);transition:transform .25s ease;box-shadow:0 25px 80px rgba(0,0,0,.25)}
+.admin-modal.show .modal-box,.admin-modal.show .chat-box{transform:none}
+.modal-close{position:absolute;right:18px;top:18px;width:34px;height:34px;border:0;background:var(--admin-accent-light);color:var(--admin-text);border-radius:50%;font-size:20px}
+.modal-title{display:flex;align-items:center;gap:15px;padding-right:40px;margin-bottom:20px}
+.modal-agent-image{width:60px;height:60px;border-radius:50%;background-size:cover;background-position:center}
+.modal-title h2{margin:0;font-family:"DM Serif Display",serif;font-size:25px}
+.modal-title p{margin:4px 0 0;color:var(--admin-muted);font-size:11px}
+.agent-property{display:flex;align-items:center;gap:13px;padding:12px;margin-bottom:10px;border:1px solid var(--admin-border);border-radius:12px;transition:.2s ease}
+.agent-property:hover{background:var(--admin-accent-light)}
+.agent-property img{width:65px;height:55px;object-fit:cover;border-radius:8px}
+.agent-property-info{flex:1}
+.agent-property-info strong{display:block;font-size:12px;margin-bottom:3px}
+.agent-property-info small{display:block;color:var(--admin-muted);font-size:9px;margin-top:2px}
+.agent-property-price{font-weight:800;font-size:12px;color:var(--admin-accent)}
+
+/* chat */
+.chat-box{max-width:550px;padding:0;overflow:hidden}
+.chat-header{padding:18px 20px;border-bottom:1px solid var(--admin-border);display:flex;justify-content:space-between;align-items:center}
+.chat-header strong{display:block;font-size:14px}
+.chat-header small{color:var(--admin-muted);font-size:10px}
+.chat-header .modal-close{position:static}
+.chat-messages{height:350px;overflow-y:auto;padding:20px;background:var(--admin-bg)}
+.message{max-width:78%;margin-bottom:14px}
+.message div{padding:10px 13px;border-radius:12px;font-size:11px;line-height:1.5}
+.message span{display:block;margin-top:4px;color:var(--admin-muted);font-size:8px}
+.client-message{margin-right:auto}
+.client-message div{background:var(--admin-card);border:1px solid var(--admin-border)}
+.admin-message{margin-left:auto;text-align:right}
+.admin-message div{background:var(--admin-accent);color:#fff}
+.chat-input-area{display:flex;gap:8px;padding:15px;border-top:1px solid var(--admin-border)}
+.chat-input-area input{flex:1;border:1px solid var(--admin-border);background:var(--admin-bg);color:var(--admin-text);border-radius:9px;padding:10px 12px;outline:none;font-size:11px}
+.chat-input-area button{border:0;background:var(--admin-accent);color:#fff;border-radius:9px;padding:0 17px;font-size:11px;font-weight:700}
+
+
+/* forms, menu, toast, plans */
+.modal-box.sm{max-width:480px}
+.modal-box h2.mt{margin:0 0 4px;font-family:"DM Serif Display",serif;font-size:24px;padding-right:40px}
+.modal-box .sub{margin:0 0 18px;color:var(--admin-muted);font-size:12px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-field.full{grid-column:1/-1}
+.form-field label{display:block;font-size:10px;font-weight:800;letter-spacing:.6px;color:var(--admin-muted);margin-bottom:5px}
+.form-field input,.form-field select{width:100%;height:42px;border:1px solid var(--admin-border);background:var(--admin-bg);color:var(--admin-text);border-radius:9px;padding:0 12px;font-size:12px;outline:none}
+.form-field input:focus,.form-field select:focus{border-color:var(--admin-accent)}
+.btn-row{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+.btn{border:1px solid var(--admin-border);background:transparent;color:var(--admin-text);padding:11px 18px;border-radius:9px;font-size:12px;font-weight:700}
+.btn.primary{background:var(--admin-accent);border-color:var(--admin-accent);color:#fff}
+.btn.danger{background:var(--red);border-color:var(--red);color:#fff}
+.btn:hover{opacity:.88}
+.action-menu{position:fixed;z-index:500;min-width:140px;background:var(--admin-card);border:1px solid var(--admin-border);border-radius:10px;box-shadow:0 14px 40px rgba(0,0,0,.18);padding:5px;display:none}
+.action-menu.show{display:block}
+.action-menu button{display:block;width:100%;text-align:left;border:0;background:transparent;color:var(--admin-text);padding:9px 12px;border-radius:7px;font-size:12px;font-weight:600}
+.action-menu button:hover{background:var(--admin-accent-light)}
+.action-menu button.del{color:var(--red)}
+.view-img{width:100%;height:190px;object-fit:cover;border-radius:12px;margin-bottom:16px}
+.view-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.view-grid div{background:var(--admin-bg);border-radius:10px;padding:12px}
+.view-grid span{display:block;font-size:9px;font-weight:800;color:var(--admin-muted);letter-spacing:.6px;margin-bottom:4px}
+.view-grid strong{font-size:13px}
+.admin-toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);background:#252523;color:#fff;padding:12px 22px;border-radius:30px;font-size:12px;font-weight:700;z-index:2000;transition:.4s}
+.admin-toast.show{transform:translate(-50%,0)}
+.stack>.admin-panel+.admin-panel{margin-top:20px}
+.pricing-card small{display:block;margin-top:6px;color:var(--admin-muted);font-size:10px;line-height:1.5}
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.plan-card{border:1px solid var(--admin-border);border-radius:14px;padding:20px;display:flex;flex-direction:column;transition:var(--t)}
+.plan-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.plan-card.featured{border:2px solid var(--admin-accent)}
+.plan-card h3{margin:0;font-family:"DM Serif Display",serif;font-size:20px;font-weight:400}
+.plan-price{font-size:26px;font-weight:800;margin:8px 0 2px}
+.plan-price small{font-size:11px;color:var(--admin-muted);font-weight:600}
+.plan-card p{margin:6px 0 12px;color:var(--admin-muted);font-size:11px;line-height:1.6}
+.plan-card ul{list-style:none;margin:0;padding:0}
+.plan-card li{font-size:11px;padding:5px 0;display:flex;gap:8px}
+.plan-card li:before{content:"✓";color:var(--green);font-weight:800}
+.fee-price{font-size:12px;font-weight:800;color:var(--admin-accent);white-space:nowrap}
+.user-cell{display:flex;align-items:center;gap:10px}
+.user-av{width:32px;height:32px;border-radius:50%;background:var(--admin-accent-light);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}
+.agent-initial{width:48px;height:48px;border-radius:50%;background:var(--admin-accent-light);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex:none}
+.modal-agent-image{display:flex;align-items:center;justify-content:center;background-color:var(--admin-accent-light);font-weight:800;font-size:22px}
+@media(max-width:1100px){.plan-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.form-grid,.view-grid{grid-template-columns:1fr}}
+
+/* settings */
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--admin-border)}
+.set-row:last-child{border-bottom:0}
+.set-row strong{display:block;font-size:12px}
+.set-row small{color:var(--admin-muted);font-size:10px}
+.switch{position:relative;width:42px;height:24px;flex:none}
+.switch input{opacity:0;width:0;height:0;position:absolute}
+.switch span{position:absolute;inset:0;background:var(--admin-border);border-radius:24px;cursor:pointer;transition:var(--t)}
+.switch span:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:var(--t)}
+.switch input:checked+span{background:var(--admin-accent)}
+.switch input:checked+span:before{transform:translateX(18px)}
+
+/* responsive */
+@media(max-width:1100px){.admin-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){
+  .admin-sidebar{width:70px;padding:20px 8px}
+  .admin-logo{justify-content:center;padding-left:0;padding-right:0;font-size:0}
+  .admin-logo-icon{font-size:17px}
+  .admin-label,.admin-menu span:not(.admin-icon),.website-btn{display:none}
+  .admin-menu a,.admin-menu button{justify-content:center}
+  .admin-main{margin-left:70px;padding:20px}
+  .agent-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .admin-main{padding:15px}
+  .admin-header{align-items:flex-start;flex-direction:column}
+  .admin-header h1{font-size:27px}
+  .admin-profile span{display:none}
+  .admin-stats,.pricing-grid{grid-template-columns:1fr}
+  .quick-actions{display:grid;grid-template-columns:1fr 1fr}
+  .quick-btn{width:100%}
+  .visit-row{align-items:flex-start}
+  .visit-action{margin-left:auto}
+}
+</style>
+</head>
+
+<body data-dash="admin">
+<div class="admin-dashboard">
+
+<aside class="admin-sidebar">
+ 
+     <a class="logo" >
+      <img src="assets/logo.png" alt="Brand Logo" width="38" height="38">
+<span>Estatery</span>    </a>
+
+
+  <div class="admin-label">MANAGEMENT</div>
+  <nav class="admin-menu">
+    <button data-nav="dashboard" class="active" onclick="showView('dashboard')"><span class="admin-icon">▦</span><span>Dashboard</span></button>
+    <button data-nav="properties" onclick="showView('properties')"><span class="admin-icon">⌂</span><span>Properties</span></button>
+    <button data-nav="agents" onclick="showView('agents')"><span class="admin-icon">♙</span><span>Agents</span></button>
+    <button data-nav="enquiries" onclick="showView('enquiries')"><span class="admin-icon">✉</span><span>Enquiries</span></button>
+    <button data-nav="visits" onclick="showView('visits')"><span class="admin-icon">▣</span><span>Site Visits</span></button>
+  </nav>
+
+  <div class="admin-label">USERS &amp; BUSINESS</div>
+  <nav class="admin-menu">
+    <button data-nav="users" onclick="showView('users')"><span class="admin-icon">♙</span><span>Users</span></button>
+    <button data-nav="pricing" onclick="showView('pricing')"><span class="admin-icon">₹</span><span>Pricing</span></button>
+    <button data-nav="reports" onclick="showView('reports')"><span class="admin-icon">▥</span><span>Reports</span></button>
+  </nav>
+
+  <div class="admin-label">SYSTEM</div>
+  <nav class="admin-menu">
+    <button data-nav="settings" onclick="showView('settings')"><span class="admin-icon">⚙</span><span>Settings</span></button>
+    <a href="login.html"><span class="admin-icon">↪</span><span>Logout</span></a>
+  </nav>
+
+  <div class="admin-bottom"><a href="index.html" class="website-btn">← View Website</a></div>
+</aside>
+
+<main class="admin-main">
+
+  <header class="admin-header">
+    <div>
+      <h1 id="pageTitle">Admin Dashboard</h1>
+      <p id="pageSub">Manage properties, users, agents and platform activity.</p>
+    </div>
+    <div class="admin-actions">
+      <button class="round-btn" onclick="toggleTheme()" title="Toggle theme">◐</button>
+      <div class="admin-profile"><div class="admin-avatar">A</div><span>Administrator</span></div>
+    </div>
+  </header>
+
+  <!-- DASHBOARD: stats -->
+  <section class="admin-stats" data-view="dashboard">
+    <div class="admin-stat"><p>TOTAL PROPERTIES</p><h2>248</h2><div class="stat-change up">↑ 12% this month</div><div class="admin-stat-icon">⌂</div></div>
+    <div class="admin-stat"><p>ACTIVE LISTINGS</p><h2>186</h2><div class="stat-change up">↑ 8 new this week</div><div class="admin-stat-icon">✓</div></div>
+    <div class="admin-stat"><p>REGISTERED USERS</p><h2>1,284</h2><div class="stat-change up">↑ 18% this month</div><div class="admin-stat-icon">♙</div></div>
+    <div class="admin-stat"><p>PENDING ENQUIRIES</p><h2>27</h2><div class="stat-change warning">Requires attention</div><div class="admin-stat-icon">✉</div></div>
+  </section>
+
+  <!-- DASHBOARD: quick actions -->
+  <div class="quick-actions" data-view="dashboard">
+    <button class="quick-btn primary" onclick="addProperty()">+ Add Property</button>
+    <button class="quick-btn" onclick="addAgent()">+ Add Agent</button>
+    <button class="quick-btn" onclick="showView('enquiries')">View Enquiries</button>
+    <button class="quick-btn" onclick="showView('visits')">Site Visits</button>
+  </div>
+
+  <!-- DASHBOARD + PROPERTIES: listings -->
+  <section class="admin-panel" id="propertiesSection" data-view="dashboard properties">
+    <div class="panel-heading">
+      <h2>Property Listings</h2>
+      <a href="#" onclick="showView('properties');return false;">Manage all →</a>
+    </div>
+    <div class="table-wrapper">
+      <table class="property-table">
+        <thead><tr><th>PROPERTY</th><th>TYPE</th><th>PRICE</th><th>AGENT</th><th>STATUS</th><th>ACTION</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div class="property-name"><img class="property-thumb" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=200&q=80" alt=""><div><strong>Modern Garden Villa</strong><small>ECR, Chennai</small></div></div></td>
+            <td>Villa</td><td>₹1.85 Cr</td><td>Priya</td>
+            <td><span class="listing-status active-status">Active</span></td>
+            <td><button class="action-btn" onclick="propertyMenu(event,this)">⋮</button></td>
+          </tr>
+          <tr>
+            <td><div class="property-name"><img class="property-thumb" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=200&q=80" alt=""><div><strong>Premium City Apartment</strong><small>Anna Nagar, Chennai</small></div></div></td>
+            <td>Apartment</td><td>₹92 Lakhs</td><td>Rahul</td>
+            <td><span class="listing-status active-status">Active</span></td>
+            <td><button class="action-btn" onclick="propertyMenu(event,this)">⋮</button></td>
+          </tr>
+          <tr>
+            <td><div class="property-name"><img class="property-thumb" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=200&q=80" alt=""><div><strong>Luxury Family Home</strong><small>Coimbatore</small></div></div></td>
+            <td>House</td><td>₹1.20 Cr</td><td>Anitha</td>
+            <td><span class="listing-status pending-status">Pending</span></td>
+            <td><button class="action-btn" onclick="propertyMenu(event,this)">⋮</button></td>
+          </tr>
+          <tr>
+            <td><div class="property-name"><img class="property-thumb" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=200&q=80" alt=""><div><strong>Green View Residence</strong><small>Madurai</small></div></div></td>
+            <td>House</td><td>₹78 Lakhs</td><td>Karthik</td>
+            <td><span class="listing-status sold-status">Sold</span></td>
+            <td><button class="action-btn" onclick="propertyMenu(event,this)">⋮</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ENQUIRIES -->
+  <section class="admin-panel" id="enquiriesSection" data-view="enquiries">
+    <div class="panel-heading"><h2>Recent Enquiries</h2></div>
+    <div class="enquiry-item enquiry-clickable" onclick="openEnquiry('Harini Balaji','Modern Garden Villa')">
+      <div><strong>Harini Balaji</strong><small>Modern Garden Villa · 2 hours ago</small></div>
+      <span class="listing-status pending-status">Pending</span>
+    </div>
+    <div class="enquiry-item enquiry-clickable" onclick="openEnquiry('Arun Kumar','Premium City Apartment')">
+      <div><strong>Arun Kumar</strong><small>Premium City Apartment · Today</small></div>
+      <span class="listing-status active-status">Replied</span>
+    </div>
+    <div class="enquiry-item enquiry-clickable" onclick="openEnquiry('Meena S','Green View Residence')">
+      <div><strong>Meena S</strong><small>Green View Residence · Yesterday</small></div>
+      <span class="listing-status pending-status">Pending</span>
+    </div>
+    <div class="enquiry-item enquiry-clickable" onclick="openEnquiry('Rajesh Kumar','OMR Apartment')">
+      <div><strong>Rajesh Kumar</strong><small>OMR Apartment · Sep 28</small></div>
+      <span class="listing-status active-status">Replied</span>
+    </div>
+  </section>
+
+  <!-- SITE VISITS -->
+  <section class="admin-panel" id="visitsSection" data-view="visits">
+    <div class="panel-heading">
+      <h2>Upcoming Site Visits</h2>
+      <button class="panel-action" onclick="openScheduleBox()">+ Schedule</button>
+    </div>
+    <div class="visit-row">
+      <div class="visit-date"><strong>05</strong><span>OCT</span></div>
+      <div class="visit-information"><strong>Modern Garden Villa</strong><p>Harini · 10:30 AM</p><small class="visit-status confirmed">✓ Client Confirmed</small></div>
+      <button class="visit-action" onclick="sendVisit('Harini','Modern Garden Villa','05 Oct','10:30 AM')">Send</button>
+    </div>
+    <div class="visit-row">
+      <div class="visit-date"><strong>07</strong><span>OCT</span></div>
+      <div class="visit-information"><strong>Premium City Apartment</strong><p>Arun · 2:00 PM</p><small class="visit-status pending">● Awaiting Response</small></div>
+      <button class="visit-action" onclick="sendVisit('Arun','Premium City Apartment','07 Oct','2:00 PM')">Send</button>
+    </div>
+    <div class="visit-row">
+      <div class="visit-date"><strong>12</strong><span>OCT</span></div>
+      <div class="visit-information"><strong>Luxury Family Home</strong><p>Meena · 11:00 AM</p><small class="visit-status reschedule">↻ Reschedule Requested</small></div>
+      <button class="visit-action" onclick="sendVisit('Meena','Luxury Family Home','12 Oct','11:00 AM')">Send</button>
+    </div>
+  </section>
+
+  <!-- AGENTS -->
+  <section class="admin-panel" id="agentsSection" data-view="agents">
+    <div class="panel-heading"><h2>Agents</h2><button class="panel-action" onclick="addAgent()">+ Add Agent</button></div>
+    <div class="agent-grid" id="agentGrid">
+      <div class="agent-card" onclick="openAgent('Priya Sharma')">
+        <img class="agent-photo" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Priya Sharma">
+        <div><strong>Priya Sharma</strong><small>24 Active Listings</small></div><span class="agent-arrow">→</span>
+      </div>
+      <div class="agent-card" onclick="openAgent('Rahul Kumar')">
+        <img class="agent-photo" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Rahul Kumar">
+        <div><strong>Rahul Kumar</strong><small>19 Active Listings</small></div><span class="agent-arrow">→</span>
+      </div>
+      <div class="agent-card" onclick="openAgent('Anitha Raj')">
+        <img class="agent-photo" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=150&q=80" alt="Anitha Raj">
+        <div><strong>Anitha Raj</strong><small>17 Active Listings</small></div><span class="agent-arrow">→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- USERS -->
+  <section class="admin-panel" data-view="users">
+    <div class="panel-heading"><h2>Registered Users</h2></div>
+    <div class="pricing-grid" style="margin-bottom:20px">
+      <div class="pricing-card"><span>BUYERS</span><strong>742</strong></div>
+      <div class="pricing-card"><span>RENTERS</span><strong>318</strong></div>
+      <div class="pricing-card"><span>OWNERS</span><strong>224</strong></div>
+    </div>
+    <div class="table-wrapper"><table class="property-table">
+      <thead><tr><th>NAME</th><th>ROLE</th><th>CITY</th><th>EMAIL</th><th>JOINED</th><th>STATUS</th></tr></thead>
+      <tbody><tr><td><div class="user-cell"><div class="user-av">H</div><strong>Harini Balaji</strong></div></td><td>Buyer</td><td>Chennai</td><td>harini.b@example.com</td><td>12 Aug 2026</td><td><span class="listing-status active-status">Active</span></td></tr><tr><td><div class="user-cell"><div class="user-av">A</div><strong>Arun Kumar</strong></div></td><td>Buyer</td><td>Coimbatore</td><td>arun.k@example.com</td><td>03 Sep 2026</td><td><span class="listing-status active-status">Active</span></td></tr><tr><td><div class="user-cell"><div class="user-av">M</div><strong>Meena S</strong></div></td><td>Renter</td><td>Madurai</td><td>meena.s@example.com</td><td>18 Sep 2026</td><td><span class="listing-status active-status">Active</span></td></tr><tr><td><div class="user-cell"><div class="user-av">R</div><strong>Rajesh Kumar</strong></div></td><td>Owner</td><td>Chennai</td><td>rajesh.k@example.com</td><td>22 Jul 2026</td><td><span class="listing-status active-status">Active</span></td></tr><tr><td><div class="user-cell"><div class="user-av">D</div><strong>Divya R</strong></div></td><td>Buyer</td><td>Trichy</td><td>divya.r@example.com</td><td>26 Sep 2026</td><td><span class="listing-status pending-status">Pending</span></td></tr><tr><td><div class="user-cell"><div class="user-av">V</div><strong>Vikram T</strong></div></td><td>Renter</td><td>Chennai</td><td>vikram.t@example.com</td><td>30 Sep 2026</td><td><span class="listing-status active-status">Active</span></td></tr><tr><td><div class="user-cell"><div class="user-av">S</div><strong>Sneha M</strong></div></td><td>Owner</td><td>Salem</td><td>sneha.m@example.com</td><td>01 Oct 2026</td><td><span class="listing-status pending-status">Pending</span></td></tr><tr><td><div class="user-cell"><div class="user-av">K</div><strong>Karan P</strong></div></td><td>Buyer</td><td>Chennai</td><td>karan.p@example.com</td><td>02 Oct 2026</td><td><span class="listing-status sold-status">Blocked</span></td></tr></tbody>
+    </table></div>
+  </section>
+
+  <!-- PRICING -->
+  <div class="stack" data-view="pricing">
+    <section class="admin-panel" id="pricingSection">
+      <div class="panel-heading"><h2>Market Prices</h2><button class="panel-action" onclick="showToast('Pricing update will be connected to your backend')">Update pricing</button></div>
+      <div class="pricing-grid">
+        <div class="pricing-card"><span>AVERAGE APARTMENT PRICE</span><strong>₹86 Lakhs</strong><small>Across 2 and 3 BHK listings in Chennai, Coimbatore and Madurai.</small></div>
+        <div class="pricing-card"><span>AVERAGE VILLA PRICE</span><strong>₹1.72 Cr</strong><small>Gated and independent villas, mostly ECR and OMR.</small></div>
+        <div class="pricing-card"><span>AVERAGE PLOT PRICE</span><strong>₹60 Lakhs</strong><small>Residential plots of about 2,400 sqft.</small></div>
+        <div class="pricing-card"><span>AVERAGE RENT</span><strong>₹28,500 / month</strong><small>Furnished and unfurnished homes combined.</small></div>
+        <div class="pricing-card"><span>AVERAGE PRICE PER SQFT</span><strong>₹6,800</strong><small>Sale listings only, all property types.</small></div>
+        <div class="pricing-card"><span>AVERAGE TIME TO SELL</span><strong>42 days</strong><small>From first listing to sold status.</small></div>
+      </div>
+    </section>
+
+    <section class="admin-panel">
+      <div class="panel-heading"><h2>Subscription Plans</h2></div>
+      <div class="plan-grid">
+        <div class="plan-card"><h3>Starter</h3><div class="plan-price">Free</div><p>For owners listing a property or two.</p>
+          <ul><li>2 active listings</li><li>Up to 5 photos per listing</li><li>Enquiries by email</li></ul></div>
+        <div class="plan-card featured"><h3>Pro</h3><div class="plan-price">₹1,499 <small>/ month</small></div><p>For active agents who want more reach.</p>
+          <ul><li>25 active listings</li><li>Up to 20 photos per listing</li><li>Priority in search results</li><li>Site visit scheduling</li></ul></div>
+        <div class="plan-card"><h3>Agency</h3><div class="plan-price">₹4,999 <small>/ month</small></div><p>For teams managing many properties.</p>
+          <ul><li>Unlimited listings</li><li>Up to 10 agent accounts</li><li>Featured homepage placement</li><li>Monthly performance reports</li></ul></div>
+      </div>
+    </section>
+
+    <section class="admin-panel">
+      <div class="panel-heading"><h2>Fees &amp; Charges</h2></div>
+      <div class="enquiry-item"><div><strong>Featured listing boost</strong><small>Pins a listing to the top of search results for 7 days.</small></div><span class="fee-price">₹499 / 7 days</span></div>
+      <div class="enquiry-item"><div><strong>Verified badge</strong><small>Document check and a site inspection by our team.</small></div><span class="fee-price">₹299 one-time</span></div>
+      <div class="enquiry-item"><div><strong>Sale commission</strong><small>Charged only when a sale closes through the platform.</small></div><span class="fee-price">1% of sale price</span></div>
+      <div class="enquiry-item"><div><strong>Rental commission</strong><small>Charged once when a tenant is confirmed.</small></div><span class="fee-price">0.5 month rent</span></div>
+    </section>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="stack" data-view="settings">
+    <section class="admin-panel">
+      <div class="panel-heading"><h2>Profile</h2></div>
+      <form onsubmit="return saveSettings(event)">
+        <div class="form-grid">
+          <div class="form-field"><label>FULL NAME</label><input id="st_name" required></div>
+          <div class="form-field"><label>EMAIL</label><input id="st_email" type="email" required></div>
+          <div class="form-field"><label>PHONE</label><input id="st_phone"></div>
+          <div class="form-field"><label>CITY</label><input id="st_city"></div>
+          <div class="form-field full"><label>COMPANY NAME</label><input id="st_company"></div>
+        </div>
+        <div class="btn-row"><button class="btn primary">Save profile</button></div>
+      </form>
+    </section>
+
+    <section class="admin-panel">
+      <div class="panel-heading"><h2>Notifications</h2></div>
+      <div class="set-row"><div><strong>New enquiry alerts</strong><small>Get notified when a buyer or renter sends an enquiry.</small></div><label class="switch"><input type="checkbox" data-pref="n_enq" checked><span></span></label></div>
+      <div class="set-row"><div><strong>Site visit updates</strong><small>Confirmations and reschedule requests from clients.</small></div><label class="switch"><input type="checkbox" data-pref="n_visit" checked><span></span></label></div>
+      <div class="set-row"><div><strong>New user registrations</strong><small>Know when someone creates an account.</small></div><label class="switch"><input type="checkbox" data-pref="n_user"><span></span></label></div>
+      <div class="set-row"><div><strong>Weekly summary email</strong><small>A Monday digest of listings, enquiries and visits.</small></div><label class="switch"><input type="checkbox" data-pref="n_week" checked><span></span></label></div>
+    </section>
+
+    <section class="admin-panel">
+      <div class="panel-heading"><h2>Appearance</h2></div>
+      <div class="set-row"><div><strong>Dark mode</strong><small>Switch the dashboard between light and dark.</small></div><label class="switch"><input type="checkbox" id="st_dark" onchange="toggleTheme()"><span></span></label></div>
+    </section>
+
+    <section class="admin-panel">
+      <div class="panel-heading"><h2>Security</h2></div>
+      <form onsubmit="return savePassword(event)">
+        <div class="form-grid">
+          <div class="form-field full"><label>CURRENT PASSWORD</label><input id="pw_old" type="password" required></div>
+          <div class="form-field"><label>NEW PASSWORD</label><input id="pw_new" type="password" minlength="8" required></div>
+          <div class="form-field"><label>CONFIRM NEW PASSWORD</label><input id="pw_conf" type="password" minlength="8" required></div>
+        </div>
+        <div class="btn-row"><button class="btn primary">Update password</button></div>
+      </form>
+    </section>
+  </div>
+
+  <!-- REPORTS: activity -->
+  <section class="admin-panel" data-view="reports">
+    <div class="panel-heading"><h2>Recent Platform Activity</h2></div>
+    <div class="enquiry-item"><div><strong>New property listing added</strong><small>Modern Garden Villa was added by Priya Sharma.</small></div><small>10 min ago</small></div>
+    <div class="enquiry-item"><div><strong>New user registered</strong><small>A new customer created an account.</small></div><small>1 hour ago</small></div>
+    <div class="enquiry-item"><div><strong>Site visit scheduled</strong><small>Harini scheduled a visit for Modern Garden Villa.</small></div><small>2 hours ago</small></div>
+    <div class="enquiry-item"><div><strong>Listing status updated</strong><small>Green View Residence was marked as Sold.</small></div><small>Yesterday</small></div>
+  </section>
+
+</main>
+</div>
+
+<!-- ACTION MENU + TOAST -->
+<div class="action-menu" id="actionMenu">
+  <button onclick="propAct('view')">View</button>
+  <button onclick="propAct('edit')">Edit</button>
+  <button class="del" onclick="propAct('delete')">Delete</button>
+</div>
+<div class="admin-toast" id="adminToast"></div>
+
+<!-- SCHEDULE VISIT MODAL -->
+<div class="admin-modal" id="scheduleModal">
+  <div class="modal-box sm">
+    <button class="modal-close" onclick="closeModal('scheduleModal')">×</button>
+    <h2 class="mt">Schedule Site Visit</h2>
+    <p class="sub">Pick the client, property, date, time and place. The details are sent to the client.</p>
+    <form id="scheduleForm" onsubmit="return saveVisit(event)">
+      <div class="form-grid">
+        <div class="form-field"><label>SEND TO (CLIENT NAME)</label><input id="sv_client" required placeholder="e.g. Harini"></div>
+        <div class="form-field"><label>PHONE OR EMAIL</label><input id="sv_contact" required placeholder="+91 98765 43210"></div>
+        <div class="form-field full"><label>PROPERTY</label><select id="sv_prop" onchange="fillPlace()"></select></div>
+        <div class="form-field"><label>DATE</label><input id="sv_date" type="date" required></div>
+        <div class="form-field"><label>TIME</label><input id="sv_time" type="time" required></div>
+        <div class="form-field"><label>PLACE / MEETING POINT</label><input id="sv_place" required></div>
+        <div class="form-field"><label>SEND VIA</label><select id="sv_via"><option>WhatsApp</option><option>SMS</option><option>Email</option></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn" onclick="closeModal('scheduleModal')">Cancel</button><button class="btn primary">Schedule &amp; Send</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- ADD AGENT MODAL -->
+<div class="admin-modal" id="addAgentModal">
+  <div class="modal-box sm">
+    <button class="modal-close" onclick="closeModal('addAgentModal')">×</button>
+    <h2 class="mt">Add Agent</h2>
+    <p class="sub">Create a new agent profile. You can assign properties later.</p>
+    <form id="agentForm" onsubmit="return saveAgent(event)">
+      <div class="form-grid">
+        <div class="form-field full"><label>FULL NAME</label><input id="ag_name" required placeholder="e.g. Suresh Babu"></div>
+        <div class="form-field"><label>PHONE</label><input id="ag_phone" required placeholder="+91 98765 43210"></div>
+        <div class="form-field"><label>EMAIL</label><input id="ag_email" type="email" required placeholder="name@example.com"></div>
+        <div class="form-field"><label>CITY</label><input id="ag_city" required placeholder="Chennai"></div>
+        <div class="form-field"><label>SPECIALISATION</label><select id="ag_spec"><option>Apartments</option><option>Villas</option><option>Plots</option><option>Rentals</option></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn" onclick="closeModal('addAgentModal')">Cancel</button><button class="btn primary">Add Agent</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- VIEW PROPERTY MODAL -->
+<div class="admin-modal" id="viewModal">
+  <div class="modal-box sm">
+    <button class="modal-close" onclick="closeModal('viewModal')">×</button>
+    <img class="view-img" id="vw_img" alt="">
+    <h2 class="mt" id="vw_name"></h2>
+    <p class="sub" id="vw_loc"></p>
+    <div class="view-grid">
+      <div><span>TYPE</span><strong id="vw_type"></strong></div>
+      <div><span>PRICE</span><strong id="vw_price"></strong></div>
+      <div><span>AGENT</span><strong id="vw_agent"></strong></div>
+      <div><span>STATUS</span><strong id="vw_status"></strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT PROPERTY MODAL -->
+<div class="admin-modal" id="editModal">
+  <div class="modal-box sm">
+    <button class="modal-close" onclick="closeModal('editModal')">×</button>
+    <h2 class="mt">Edit Property</h2>
+    <p class="sub">Update the listing details.</p>
+    <form onsubmit="return saveEdit(event)">
+      <div class="form-grid">
+        <div class="form-field full"><label>PROPERTY NAME</label><input id="ed_name" required></div>
+        <div class="form-field"><label>LOCATION</label><input id="ed_loc" required></div>
+        <div class="form-field"><label>PRICE</label><input id="ed_price" required></div>
+        <div class="form-field"><label>TYPE</label><select id="ed_type"><option>Apartment</option><option>Villa</option><option>House</option><option>Plot</option></select></div>
+        <div class="form-field"><label>AGENT</label><select id="ed_agent"><option>Priya</option><option>Rahul</option><option>Anitha</option><option>Karthik</option></select></div>
+        <div class="form-field full"><label>STATUS</label><select id="ed_status"><option>Active</option><option>Pending</option><option>Sold</option></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn" onclick="closeModal('editModal')">Cancel</button><button class="btn primary">Save changes</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="admin-modal" id="deleteModal">
+  <div class="modal-box sm">
+    <button class="modal-close" onclick="closeModal('deleteModal')">×</button>
+    <h2 class="mt">Delete property?</h2>
+    <p class="sub" id="dl_text"></p>
+    <div class="btn-row"><button class="btn" onclick="closeModal('deleteModal')">Cancel</button><button class="btn danger" onclick="confirmDelete()">Delete</button></div>
+  </div>
+</div>
+
+<!-- AGENT MODAL -->
+<div class="admin-modal" id="agentModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('agentModal')">×</button>
+    <div class="modal-title">
+      <div class="modal-agent-image" id="modalAgentImage"></div>
+      <div><h2 id="modalAgentName">Agent</h2><p>Properties currently for sale</p></div>
+    </div>
+    <div id="agentProperties"></div>
+  </div>
+</div>
+
+<!-- ENQUIRY CHAT MODAL -->
+<div class="admin-modal" id="enquiryModal">
+  <div class="chat-box">
+    <div class="chat-header">
+      <div><strong id="chatClientName">Client</strong><small id="chatProperty">Property enquiry</small></div>
+      <button class="modal-close" onclick="closeModal('enquiryModal')">×</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="message client-message"><div>Hi, I am interested in this property. Is it still available for sale?</div><span>10:32 AM</span></div>
+      <div class="message admin-message"><div>Hello! Yes, the property is currently available.</div><span>10:40 AM</span></div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Type your reply..." onkeydown="if(event.key==='Enter')sendMessage()">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- theme ---------- */
+function toggleTheme(){
+  var next = document.documentElement.getAttribute("data-theme")==="dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try{ localStorage.setItem("theme", next); }catch(e){}
+}
+
+/* ---------- views ---------- */
+var VIEW_TITLES = {
+  dashboard:["Admin Dashboard","Manage properties, users, agents and platform activity."],
+  properties:["Properties","All property listings."],
+  agents:["Agents","Your team and their listings."],
+  enquiries:["Enquiries","Messages from buyers and renters."],
+  visits:["Site Visits","Upcoming scheduled visits."],
+  pricing:["Pricing","Average prices across the platform."],
+  settings:["Settings","Profile, notifications and security."],
+  users:["Users","Registered buyers, renters and owners."],
+  reports:["Reports","Recent platform activity."]
+};
+
+function showView(name){
+  document.querySelectorAll("[data-view]").forEach(function(el){
+    el.classList.toggle("is-hidden", el.dataset.view.split(" ").indexOf(name) < 0);
+  });
+  document.querySelectorAll(".admin-menu button[data-nav]").forEach(function(b){
+    b.classList.toggle("active", b.dataset.nav === name);
+  });
+  var t = VIEW_TITLES[name] || VIEW_TITLES.dashboard;
+  document.getElementById("pageTitle").textContent = t[0];
+  document.getElementById("pageSub").textContent = t[1];
+  if(name === "settings") loadSettings();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ---------- agents ---------- */
+var agentData = {
+  "Priya Sharma":{image:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",properties:[
+    {name:"Modern Garden Villa",location:"ECR, Chennai",price:"₹1.85 Cr",image:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=300&q=80"},
+    {name:"Sea View Residence",location:"Besant Nagar, Chennai",price:"₹2.10 Cr",image:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=300&q=80"},
+    {name:"Luxury ECR Home",location:"Neelankarai, Chennai",price:"₹1.65 Cr",image:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=300&q=80"}]},
+  "Rahul Kumar":{image:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",properties:[
+    {name:"Premium City Apartment",location:"Anna Nagar, Chennai",price:"₹92 Lakhs",image:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=300&q=80"},
+    {name:"OMR Business Apartment",location:"OMR, Chennai",price:"₹78 Lakhs",image:"https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=300&q=80"},
+    {name:"Urban Heights",location:"Velachery, Chennai",price:"₹1.05 Cr",image:"https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=300&q=80"}]},
+  "Anitha Raj":{image:"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=200&q=80",properties:[
+    {name:"Luxury Family Home",location:"Coimbatore",price:"₹1.20 Cr",image:"https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=300&q=80"},
+    {name:"Green Valley Villa",location:"RS Puram, Coimbatore",price:"₹1.45 Cr",image:"https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=300&q=80"}]}
+};
+
+function openAgent(name){
+  var a = agentData[name]; if(!a) return;
+  document.getElementById("modalAgentName").textContent = name;
+  var im = document.getElementById("modalAgentImage");
+  im.style.backgroundImage = a.image ? 'url("'+a.image+'")' : "none";
+  im.textContent = a.image ? "" : name.charAt(0);
+  var box = document.getElementById("agentProperties"); box.innerHTML = "";
+  if(!a.properties.length) box.innerHTML = '<p style="color:var(--admin-muted);font-size:12px">No properties assigned yet.</p>';
+  a.properties.forEach(function(p){
+    var c = document.createElement("div"); c.className = "agent-property";
+    c.innerHTML = '<img src="'+p.image+'" alt=""><div class="agent-property-info"><strong>'+p.name+'</strong><small>'+p.location+'</small><small>● Available for Sale</small></div><div class="agent-property-price">'+p.price+'</div>';
+    box.appendChild(c);
+  });
+  document.getElementById("agentModal").classList.add("show");
+}
+
+function closeModal(id){ var m = document.getElementById(id); if(m) m.classList.remove("show"); }
+
+/* ---------- enquiry chat ---------- */
+function openEnquiry(client, property){
+  document.getElementById("chatClientName").textContent = client;
+  document.getElementById("chatProperty").textContent = property;
+  document.getElementById("enquiryModal").classList.add("show");
+  setTimeout(function(){ document.getElementById("chatInput").focus(); }, 200);
+}
+
+function escapeHtml(t){ var d = document.createElement("div"); d.textContent = t; return d.innerHTML; }
+
+function sendMessage(){
+  var input = document.getElementById("chatInput"), msg = input.value.trim();
+  if(!msg) return;
+  var box = document.getElementById("chatMessages");
+  var time = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+  var el = document.createElement("div"); el.className = "message admin-message";
+  el.innerHTML = "<div>"+escapeHtml(msg)+"</div><span>"+time+"</span>";
+  box.appendChild(el); input.value = ""; box.scrollTop = box.scrollHeight;
+}
+
+/* ---------- actions ---------- */
+function addProperty(){ alert("Add Property\n\nProperty creation form can be connected here."); }
+function showComingSoon(f){ alert(f+"\n\nThis section is ready to be connected to your backend."); }
+
+/* ---------- close modals ---------- */
+document.querySelectorAll(".admin-modal").forEach(function(m){
+  m.addEventListener("click", function(e){ if(e.target === m) m.classList.remove("show"); });
+});
+document.addEventListener("keydown", function(e){
+  if(e.key !== "Escape") return;
+  document.querySelectorAll(".admin-modal.show").forEach(function(m){ m.classList.remove("show"); });
+});
+
+/* ---------- toast ---------- */
+function showToast(m){
+  var t = document.getElementById("adminToast");
+  t.textContent = m; t.classList.add("show");
+  clearTimeout(t._t); t._t = setTimeout(function(){ t.classList.remove("show"); }, 2600);
+}
+function $v(id){ return document.getElementById(id); }
+function openModal(id){ $v(id).classList.add("show"); }
+
+/* ---------- property rows ---------- */
+var STATUS_CLASS = {Active:"active-status", Pending:"pending-status", Sold:"sold-status"};
+function rowData(tr){
+  var c = tr.cells;
+  return {
+    img: c[0].querySelector("img").src,
+    name: c[0].querySelector("strong").textContent,
+    loc: c[0].querySelector("small").textContent,
+    type: c[1].textContent.trim(), price: c[2].textContent.trim(),
+    agent: c[3].textContent.trim(), status: c[4].textContent.trim()
+  };
+}
+
+/* ---------- 3-dot menu: view / edit / delete ---------- */
+var menuRow = null;
+function hideMenu(){ $v("actionMenu").classList.remove("show"); }
+function propertyMenu(ev, btn){
+  ev.stopPropagation();
+  var m = $v("actionMenu"), tr = btn.closest("tr");
+  if(m.classList.contains("show") && menuRow === tr){ hideMenu(); return; }
+  menuRow = tr;
+  var r = btn.getBoundingClientRect();
+  m.style.top = (r.bottom + 4) + "px";
+  m.style.left = Math.max(8, r.right - 140) + "px";
+  m.classList.add("show");
+}
+document.addEventListener("click", hideMenu);
+window.addEventListener("scroll", hideMenu, true);
+
+function propAct(kind){
+  hideMenu();
+  if(!menuRow) return;
+  var d = rowData(menuRow);
+  if(kind === "view"){
+    $v("vw_img").src = d.img; $v("vw_name").textContent = d.name; $v("vw_loc").textContent = d.loc;
+    $v("vw_type").textContent = d.type; $v("vw_price").textContent = d.price;
+    $v("vw_agent").textContent = d.agent; $v("vw_status").textContent = d.status;
+    openModal("viewModal");
+  } else if(kind === "edit"){
+    $v("ed_name").value = d.name; $v("ed_loc").value = d.loc; $v("ed_price").value = d.price;
+    $v("ed_type").value = d.type; $v("ed_agent").value = d.agent; $v("ed_status").value = d.status;
+    openModal("editModal");
+  } else {
+    $v("dl_text").textContent = "\u201c" + d.name + "\u201d will be removed from your listings. This cannot be undone.";
+    openModal("deleteModal");
+  }
+}
+function saveEdit(e){
+  e.preventDefault();
+  var c = menuRow.cells;
+  c[0].querySelector("strong").textContent = $v("ed_name").value;
+  c[0].querySelector("small").textContent = $v("ed_loc").value;
+  c[1].textContent = $v("ed_type").value;
+  c[2].textContent = $v("ed_price").value;
+  c[3].textContent = $v("ed_agent").value;
+  var st = $v("ed_status").value;
+  c[4].innerHTML = '<span class="listing-status ' + STATUS_CLASS[st] + '">' + st + '</span>';
+  closeModal("editModal"); showToast("Property updated");
+  return false;
+}
+function confirmDelete(){
+  if(menuRow){ menuRow.remove(); menuRow = null; }
+  closeModal("deleteModal"); showToast("Property deleted");
+}
+
+/* ---------- schedule visit ---------- */
+function fillPlace(){
+  var o = $v("sv_prop").selectedOptions[0];
+  if(o) $v("sv_place").value = o.dataset.loc || "";
+}
+function openScheduleBox(){
+  $v("scheduleForm").reset();
+  var sel = $v("sv_prop"); sel.innerHTML = "";
+  document.querySelectorAll("#propertiesSection tbody tr").forEach(function(tr){
+    var d = rowData(tr), o = document.createElement("option");
+    o.value = d.name; o.textContent = d.name; o.dataset.loc = d.loc; sel.appendChild(o);
+  });
+  $v("sv_date").min = new Date().toISOString().slice(0,10);
+  fillPlace(); openModal("scheduleModal");
+}
+function fmtTime(t){
+  var p = t.split(":"), h = +p[0], ap = h >= 12 ? "PM" : "AM";
+  return ((h % 12) || 12) + ":" + p[1] + " " + ap;
+}
+function sendVisit(client, property, date, time){
+  showToast("Visit details sent to " + client + " (" + date + ", " + time + ")");
+}
+function saveVisit(e){
+  e.preventDefault();
+  var client = $v("sv_client").value.trim(), prop = $v("sv_prop").value, place = $v("sv_place").value.trim();
+  var dt = new Date($v("sv_date").value + "T00:00:00");
+  var day = ("0" + dt.getDate()).slice(-2), mon = dt.toLocaleString("en", {month:"short"}).toUpperCase();
+  var time = fmtTime($v("sv_time").value);
+  var row = document.createElement("div"); row.className = "visit-row";
+  row.innerHTML = '<div class="visit-date"><strong>' + day + '</strong><span>' + mon + '</span></div>' +
+    '<div class="visit-information"><strong>' + escapeHtml(prop) + '</strong><p>' + escapeHtml(client) + ' · ' + time + ' · ' + escapeHtml(place) + '</p><small class="visit-status pending">● Awaiting Response</small></div>';
+  var b = document.createElement("button"); b.className = "visit-action"; b.textContent = "Send";
+  b.onclick = function(){ sendVisit(client, prop, day + " " + mon, time); };
+  row.appendChild(b);
+  document.querySelector("#visitsSection .panel-heading").insertAdjacentElement("afterend", row);
+  closeModal("scheduleModal");
+  showToast("Visit scheduled. Details sent to " + client + " via " + $v("sv_via").value);
+  return false;
+}
+
+/* ---------- add agent ---------- */
+function addAgent(){ $v("agentForm").reset(); openModal("addAgentModal"); }
+function saveAgent(e){
+  e.preventDefault();
+  var name = $v("ag_name").value.trim();
+  if(agentData[name]){ showToast("An agent with this name already exists"); return false; }
+  agentData[name] = {image:null, properties:[]};
+  var card = document.createElement("div"); card.className = "agent-card";
+  card.onclick = function(){ openAgent(name); };
+  card.innerHTML = '<div class="agent-initial">' + escapeHtml(name.charAt(0).toUpperCase()) + '</div>' +
+    '<div><strong>' + escapeHtml(name) + '</strong><small>0 Active Listings · ' + escapeHtml($v("ag_spec").value) + '</small></div><span class="agent-arrow">→</span>';
+  $v("agentGrid").appendChild(card);
+  closeModal("addAgentModal"); showToast(name + " added as an agent");
+  if(!document.querySelector('[data-nav="agents"]').classList.contains("active")) showView("agents");
+  return false;
+}
+
+/* ---------- settings ---------- */
+var SET_DEFAULT = {name:"Administrator", email:"admin@estatery.example", phone:"+91 98765 43210", city:"Chennai", company:"Estatery Realty"};
+function loadSettings(){
+  var d = SET_DEFAULT, prefs = {};
+  try{ d = JSON.parse(localStorage.getItem("adminProfile")) || SET_DEFAULT; prefs = JSON.parse(localStorage.getItem("adminPrefs")) || {}; }catch(e){}
+  ["name","email","phone","city","company"].forEach(function(k){ $v("st_"+k).value = d[k] || ""; });
+  document.querySelectorAll("[data-pref]").forEach(function(c){
+    if(prefs[c.dataset.pref] !== undefined) c.checked = prefs[c.dataset.pref];
+    c.onchange = function(){
+      prefs[c.dataset.pref] = c.checked;
+      try{ localStorage.setItem("adminPrefs", JSON.stringify(prefs)); }catch(e){}
+      showToast("Preference saved");
+    };
+  });
+  $v("st_dark").checked = document.documentElement.getAttribute("data-theme") === "dark";
+}
+function saveSettings(e){
+  e.preventDefault();
+  var d = {};
+  ["name","email","phone","city","company"].forEach(function(k){ d[k] = $v("st_"+k).value.trim(); });
+  try{ localStorage.setItem("adminProfile", JSON.stringify(d)); }catch(x){}
+  document.querySelector(".admin-profile span").textContent = d.name || "Administrator";
+  document.querySelector(".admin-avatar").textContent = (d.name || "A").charAt(0).toUpperCase();
+  showToast("Profile saved");
+  return false;
+}
+function savePassword(e){
+  e.preventDefault();
+  if($v("pw_new").value !== $v("pw_conf").value){ showToast("New passwords do not match"); return false; }
+  e.target.reset(); showToast("Password updated");
+  return false;
+}
+
+/* ---------- start ---------- */
+showView("dashboard");
+try{
+  var sp = JSON.parse(localStorage.getItem("adminProfile"));
+  if(sp && sp.name){
+    document.querySelector(".admin-profile span").textContent = sp.name;
+    document.querySelector(".admin-avatar").textContent = sp.name.charAt(0).toUpperCase();
+  }
+}catch(e){}
+</script>
+
+<!-- Shared data + user-dashboard script. dashboard.js now skips itself on the admin page. -->
+<script src="assets/js/data.js"></script>
+<script src="assets/js/dashboard.js"></script>
+</body>
+</html>
